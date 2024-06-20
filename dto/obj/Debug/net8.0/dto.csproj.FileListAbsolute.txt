@@ -1,0 +1,16 @@
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\bin\Debug\net8.0\dto.deps.json
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\bin\Debug\net8.0\dto.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\bin\Debug\net8.0\dto.pdb
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\bin\Debug\net8.0\bll.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\bin\Debug\net8.0\bll.pdb
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.csproj.AssemblyReference.cache
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.GeneratedMSBuildEditorConfig.editorconfig
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.AssemblyInfoInputs.cache
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.AssemblyInfo.cs
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.csproj.CoreCompileInputs.cache
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.csproj.CopyComplete
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\refint\dto.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.pdb
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\ref\dto.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\dto\obj\Debug\net8.0\dto.sourcelink.json

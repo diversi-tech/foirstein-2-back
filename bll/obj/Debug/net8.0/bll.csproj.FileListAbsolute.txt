@@ -1,0 +1,12 @@
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\bin\Debug\net8.0\bll.deps.json
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\bin\Debug\net8.0\bll.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\bin\Debug\net8.0\bll.pdb
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.GeneratedMSBuildEditorConfig.editorconfig
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.AssemblyInfoInputs.cache
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.AssemblyInfo.cs
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.csproj.CoreCompileInputs.cache
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\refint\bll.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.pdb
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\ref\bll.dll
+D:\The user\Desktop\לימודים\פרקטיקום\foirstein-2-back\bll\obj\Debug\net8.0\bll.sourcelink.json
