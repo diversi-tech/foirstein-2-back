@@ -1,43 +1,37 @@
-﻿using DAL.DalApi;
-using DAL.DalImplementation;
-using DAL.Do;
+﻿using dal.models;
+using DAL.DalService;
+using DAL.IDal;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace DAL;
 
 public class DalManager
 {
-    //public IJobRequest JobRequests { get; }
-    //public IBoss Bosses { get; }
-    //public IFiled Fileds { get; }
-    //public IJobOffer JobOffers { get; }
-    //public ITypeOfSalary TypeOfSalaries { get; }
-    //public IInterview Interviews { get; }
-    //public ITest Tests { get; }
-    //public IQuestion Questions { get; }
+    public IBorrowApprovalRequest BorrowApprovalRequests { get; }
+    public IBorrowRequest BorrowRequests { get; }
+    public IItem Items { get; }
+    public IItemTag ItemTags { get; }
+    public ISearchLog SearchLogs { get; }
+    public ITag Tags { get; }
+  
 
     public DalManager()
     {
         ServiceCollection collections = new ServiceCollection();
-        /*collections.AddSingleton<dbcontext>();
-        collections.AddSingleton<IBoss, BossService>();
-        collections.AddSingleton<IFiled, FiledService>();
-        collections.AddSingleton<IJobOffer, JobOfferService>();
-        collections.AddSingleton<IJobRequest, JobRequestService>();
-        collections.AddSingleton<ITypeOfSalary, TypeOfSalaryService>();
-        collections.AddSingleton<IInterview, InterviewService>();
-        collections.AddSingleton<ITest, TestService>();
-        collections.AddSingleton<IQuestion, QuestionService>();
+        collections.AddSingleton<LiberiansDbContext>();
+        collections.AddSingleton<IBorrowApprovalRequest, BorrowApprovalRequestService>();
+        collections.AddSingleton<IBorrowRequest, BorrowRequestService>();
+        collections.AddSingleton<IItem, ItemService>();
+        collections.AddSingleton<IItemTag, ItemTagService>();
+        collections.AddSingleton<ISearchLog, SearchLogService>();
+        collections.AddSingleton<ITag, TagService>();
         var serviceprovider = collections.BuildServiceProvider();
-
-        Bosses = serviceprovider.GetRequiredService<IBoss>();
-        JobRequests = serviceprovider.GetRequiredService<IJobRequest>();
-        Fileds = serviceprovider.GetRequiredService<IFiled>();
-        JobOffers = serviceprovider.GetRequiredService<IJobOffer>();
-        TypeOfSalaries = serviceprovider.GetRequiredService<ITypeOfSalary>();
-        Interviews = serviceprovider.GetRequiredService<IInterview>();
-        Tests = serviceprovider.GetRequiredService<ITest>();*/
-        /*Questions = serviceprovider.GetRequiredService<IQuestion>();*/
+        BorrowApprovalRequests = serviceprovider.GetRequiredService<IBorrowApprovalRequest>();
+        BorrowRequests = serviceprovider.GetRequiredService<IBorrowRequest>();
+        Items = serviceprovider.GetRequiredService<IItem>();
+        ItemTags = serviceprovider.GetRequiredService<IItemTag>();
+        SearchLogs = serviceprovider.GetRequiredService<ISearchLog>();
+        Tags = serviceprovider.GetRequiredService<ITag>();
+      
     }
 
 }
