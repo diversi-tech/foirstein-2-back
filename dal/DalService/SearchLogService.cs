@@ -1,5 +1,4 @@
 ﻿using dal.models;
-using DAL.DalApi;
 using DAL.IDal;
 using System;
 using System.Collections.Generic;
@@ -11,32 +10,32 @@ namespace DAL.DalService
 {
     public class SearchLogService : ISearchLog
     {
-        public Task<bool> Create(ISearchLog item)
+        public Task<bool> Create(SearchLog item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(ISearchLog item)
+        public Task<bool> Delete(SearchLog item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ISearchLog>> Read(Func<ISearchLog, bool> filter)
+        public Task<List<SearchLog>> Read(Func<SearchLog, bool> filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ISearchLog>> ReadAll()
+        public Task<List<SearchLog>> ReadAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<ISearchLog> ReadbyId(int item)
+        public Task<SearchLog> ReadbyId(int item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(ISearchLog item)
+        public Task<bool> Update(SearchLog item)
         {
             throw new NotImplementedException();
         }

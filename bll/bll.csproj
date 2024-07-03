@@ -17,12 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dal\dal.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BllModels\" />
-    <Folder Include="IBll\" />
-    <Folder Include="BllService\" />
+    <ProjectReference Include="..\dto\dto.csproj" />
   </ItemGroup>
 
 </Project>
