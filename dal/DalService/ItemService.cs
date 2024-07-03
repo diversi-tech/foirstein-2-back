@@ -8,34 +8,34 @@ using System.Threading.Tasks;
 
 namespace DAL.DalService
 {
-    public class ItemService : IItem
+    public class ItemService : IItemTag
     {
-        public Task<bool> Create(Item item)
+        public Task<bool> Create(ItemTag item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Item item)
+        public Task<bool> Delete(ItemTag item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Item>> Read(Func<Item, bool> filter)
+        public Task<List<ItemTag>> Read(Func<ItemTag, bool> filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Item>> ReadAll()
+        public Task<List<ItemTag>> ReadAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Item> ReadbyId(int item)
+        public Task<ItemTag> ReadbyId(int item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(Item item)
+        public Task<bool> Update(ItemTag item)
         {
             throw new NotImplementedException();
         }
