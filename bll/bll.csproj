@@ -20,4 +20,9 @@
     <ProjectReference Include="..\dto\dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BllModels\" />
+    <Folder Include="BllService\" />
+  </ItemGroup>
+
 </Project>
