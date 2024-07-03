@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dal", "dal\dal.csproj", "{7339C51E-D29B-4100-8C56-931BEDE93D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "dal\DAL.csproj", "{7339C51E-D29B-4100-8C56-931BEDE93D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dto", "dto\dto.csproj", "{C6332737-8235-4F48-B2B8-0D5537FA9D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dto", "dto\dto.csproj", "{C6332737-8235-4F48-B2B8-0D5537FA9D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bll", "bll\bll.csproj", "{DEACC499-46E2-4D10-AF36-4FD85688D63F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "bll\BLL.csproj", "{DEACC499-46E2-4D10-AF36-4FD85688D63F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webApi", "webApi\webApi.csproj", "{C7D70216-9829-44C3-BBEF-99FC829B13EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEBAPI", "webApi\WEBAPI.csproj", "{C7D70216-9829-44C3-BBEF-99FC829B13EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
