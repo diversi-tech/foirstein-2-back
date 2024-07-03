@@ -20,8 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BllModels\" />
     <Folder Include="BllService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
