@@ -1,4 +1,5 @@
 ﻿using dal.models;
+using DAL.DalApi;
 using DAL.IDal;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,34 @@ using System.Threading.Tasks;
 
 namespace DAL.DalService
 {
-    public class ItemService : IItemTag
+    public class ItemService : IItem
     {
-        public Task<bool> Create(ItemTag item)
+        public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(ItemTag item)
+        public Task<bool> Delete(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ItemTag>> Read(Func<ItemTag, bool> filter)
+        public Task<List<Item>> Read(Func<Item, bool> filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ItemTag>> ReadAll()
+        public Task<List<Item>> ReadAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<ItemTag> ReadbyId(int item)
+        public Task<Item> ReadbyId(int item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(ItemTag item)
+        public Task<bool> Update(Item item)
         {
             throw new NotImplementedException();
         }
