@@ -7,8 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\" />
-    <Folder Include="Interfaces\" />
+    <Compile Remove="Functions\**" />
+    <Compile Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Functions\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <None Remove="Functions\**" />
+    <None Remove="Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\dal\dal.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BllModels\" />
+    <Folder Include="IBll\" />
+    <Folder Include="BllService\" />
   </ItemGroup>
 
 </Project>

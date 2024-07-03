@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\" />
-    <Folder Include="Interfaces\" />
+    <Compile Remove="Functions\**" />
+    <Compile Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Functions\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <None Remove="Functions\**" />
+    <None Remove="Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
 
@@ -18,6 +25,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\dto\dto.csproj" />
   </ItemGroup>
 
 </Project>

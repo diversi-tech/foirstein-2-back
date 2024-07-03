@@ -1,4 +1,6 @@
-﻿using DAL.IDal;
+﻿using dal.models;
+using DAL.DalApi;
+using DAL.IDal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
