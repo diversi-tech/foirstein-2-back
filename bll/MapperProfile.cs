@@ -27,6 +27,12 @@ namespace BLL
             CreateMap<Tag, BllTag>().ReverseMap();
             CreateMap<Item, BllItem>().ReverseMap();
 
+            CreateMap<ItemTag,BllItemTag>().ReverseMap();
+            CreateMap<Tag, BllTag>().ReverseMap();
+            CreateMap<Item, BllItem>().ReverseMap();
+            CreateMap<RatingNote, BllRatingNote>().ReverseMap();
+
+
             /*   CreateMap<DAL.Models.CommentsToRecipe, CommentsToRecipe>()
                    .ForMember(dest => dest.UserName,
                    opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName)).ReverseMap();
