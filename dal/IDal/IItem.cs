@@ -10,5 +10,7 @@ namespace DAL.IDal
 {
     public interface IItem:ICrud<Item>
     {
+        Task<IEnumerable<Item>> ReadByString(String searchKey);
+
     }
 }
