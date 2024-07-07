@@ -1,5 +1,6 @@
 ﻿using dal.models;
 using DAL.IDal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace DAL.DalService
 {
     public class TagService : ITag
     {
+        LiberiansDbContext _context;
+
+        public TagService(LiberiansDbContext context)
+        {
+            this._context = context;
+        }
+
         public Task<bool> Create(Tag item)
         {
             throw new NotImplementedException();
@@ -25,14 +33,16 @@ namespace DAL.DalService
             throw new NotImplementedException();
         }
 
+        //public Task<List<Tag>> ReadAll() => _context.Tags.ToList();
         public Task<List<Tag>> ReadAll()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); 
         }
 
-        public Task<Tag> ReadbyId(int item)
+
+        public async Task<Tag> ReadbyId(int item)
         {
-            throw new NotImplementedException();
+            return _context.Tags.ToList().Find(t => t.Id == item);
         }
 
         public Task<bool> Update(Tag item)

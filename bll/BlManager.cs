@@ -6,18 +6,28 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace BLL
 {
     public class BlManager
     {
-        public IbllItem ibllItem { get; }
+        public IbllItemTag bllItemTag { get; }
+        public IbllTag bllTag { get; }
+
         public BlManager()
         {
             var services = new ServiceCollection();
+
             services.AddSingleton<DalManager>();
-            services.AddSingleton<IbllItem, BllItemService>();
+
+            services.AddSingleton<IbllItemTag, BllItemTagService>();
+            services.AddSingleton<IbllTag, BllTagService>();
+
             var serviceProvider = services.BuildServiceProvider();
-            ibllItem = serviceProvider.GetRequiredService<IbllItem>();
+
+            bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
+            bllTag = serviceProvider.GetRequiredService<IbllTag>();
+        
         }
     }
 }
