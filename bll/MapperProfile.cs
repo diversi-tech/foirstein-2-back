@@ -25,6 +25,8 @@ namespace BLL
             CreateMap<BorrowRequest,BllBorrowRequest>().ReverseMap();
             CreateMap<ItemTag,BllItemTag>().ReverseMap();
             CreateMap<Tag, BllTag>().ReverseMap();
+            CreateMap<Item, BllItem>();
+
             /*   CreateMap<DAL.Models.CommentsToRecipe, CommentsToRecipe>()
                    .ForMember(dest => dest.UserName,
                    opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName)).ReverseMap();
@@ -46,6 +48,6 @@ namespace BLL
                CreateMap<DAL.Models.User, User>().ReverseMap();*/
         }
 
-    
+
     }
 }

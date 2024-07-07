@@ -27,6 +27,7 @@ namespace BLL
 
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
             bllTag = serviceProvider.GetRequiredService<IbllTag>();
+        
         }
     }
 }
