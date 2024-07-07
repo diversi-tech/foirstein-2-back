@@ -1,5 +1,7 @@
-﻿using dal.models;
+﻿using Azure;
+using dal.models;
 using DAL.IDal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,12 @@ namespace DAL.DalService
 {
     public class ItemTagService : IItemTag
     {
+        LiberiansDbContext _context;
+
+        public ItemTagService(LiberiansDbContext context)
+        {
+            this._context = context;
+        }
         public Task<bool> Create(ItemTag item)
         {
             throw new NotImplementedException();
@@ -25,9 +33,13 @@ namespace DAL.DalService
             throw new NotImplementedException();
         }
 
-        public Task<List<ItemTag>> ReadAll()
+        public async Task<List<ItemTag>> ReadAll()
         {
             throw new NotImplementedException();
+        }
+        public async Task<List<ItemTag>> ReadAll(int itemId)
+        {
+            return _context.ItemTags.Where(itemTag =>  itemTag.ItemId == itemId).ToList();
         }
 
         public Task<ItemTag> ReadbyId(int item)
