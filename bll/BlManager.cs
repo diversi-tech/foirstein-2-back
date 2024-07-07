@@ -1,24 +1,23 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BLL.BllModels;
+using BLL.BllService;
+using BLL.IBll;
+using DAL;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
 namespace BLL
 {
     public class BlManager
     {
-
-
+        public IbllItem ibllItem { get; }
         public BlManager()
-
-         {   ServiceCollection collections = new ServiceCollection();
-
-
-            var serviceprovider = collections.BuildServiceProvider();
-
-
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<DalManager>();
+            services.AddSingleton<IbllItem, BllItemService>();
+            var serviceProvider = services.BuildServiceProvider();
+            ibllItem = serviceProvider.GetRequiredService<IbllItem>();
         }
     }
 }
