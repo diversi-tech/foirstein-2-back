@@ -23,8 +23,11 @@ namespace BLL
         {
 
             CreateMap<BorrowRequest,BllBorrowRequest>().ReverseMap();
-            CreateMap<Item, BllItem>();
+            CreateMap<ItemTag,BllItemTag>().ReverseMap();
+            CreateMap<Tag, BllTag>().ReverseMap();
+            CreateMap<Item, BllItem>().ReverseMap();
             CreateMap<RatingNote, BllRatingNote>().ReverseMap();
+
 
             /*   CreateMap<DAL.Models.CommentsToRecipe, CommentsToRecipe>()
                    .ForMember(dest => dest.UserName,
