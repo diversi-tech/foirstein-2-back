@@ -1,5 +1,6 @@
 ﻿using BLL.BllModels;
 using BLL.BllService;
+using BLL.BllServices;
 using BLL.IBll;
 using DAL;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +16,6 @@ namespace BLL
         public IbllItemTag bllItemTag { get; }
         public IbllTag bllTag { get; }
         public IbllItem bllItem { get; }
-
-        public IbllItemTag bllItemTag { get; }
-        public IbllTag bllTag { get; }
-        public IbllItem bllItem { get; }
         public IbllRatingNote BlRatingNote { get; }
 
         public BlManager()
@@ -30,17 +27,9 @@ namespace BLL
             services.AddSingleton<IbllItem, BllItemService>();
             services.AddSingleton<IbllItemTag, BllItemTagService>();
             services.AddSingleton<IbllTag, BllTagService>();
-
-            services.AddSingleton<IbllItemTag, BllItemTagService>();
-            services.AddSingleton<IbllTag, BllTagService>();
-            services.AddSingleton<IbllRatingNote, BllRatingNoteService>();
+            services.AddSingleton<IbllRatingNote, BllRatingService>();
 
             var serviceProvider = services.BuildServiceProvider();
-
-            bllItem = serviceProvider.GetRequiredService<IbllItem>();
-            bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
-            bllTag = serviceProvider.GetRequiredService<IbllTag>();
-
 
             bllItem = serviceProvider.GetRequiredService<IbllItem>();
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
