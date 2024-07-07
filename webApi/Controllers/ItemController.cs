@@ -16,7 +16,7 @@ namespace WEBAPI.Controllers
 
         public ItemController(BlManager blManager)
         {
-            _ibllItem = blManager.ibllItem;
+            _ibllItem = blManager.bllItem;
         }
 
         [HttpGet("{searchKey}")]

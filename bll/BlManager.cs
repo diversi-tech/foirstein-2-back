@@ -13,21 +13,23 @@ namespace BLL
     {
         public IbllItemTag bllItemTag { get; }
         public IbllTag bllTag { get; }
+        public IbllItem bllItem { get; }
 
         public BlManager()
         {
             var services = new ServiceCollection();
 
             services.AddSingleton<DalManager>();
-
+            services.AddSingleton<IbllItem, BllItemService>();
             services.AddSingleton<IbllItemTag, BllItemTagService>();
             services.AddSingleton<IbllTag, BllTagService>();
 
             var serviceProvider = services.BuildServiceProvider();
 
+            bllItem = serviceProvider.GetRequiredService<IbllItem>();
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
             bllTag = serviceProvider.GetRequiredService<IbllTag>();
-        
+
         }
     }
 }
