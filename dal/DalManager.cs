@@ -12,7 +12,8 @@ public class DalManager
     public IItemTag ItemTags { get; }
     public ISearchLog SearchLogs { get; }
     public ITag Tags { get; }
-  
+    public IRatingNote ratingNote { get; }
+
 
     public DalManager()
     {
@@ -24,6 +25,8 @@ public class DalManager
         collections.AddSingleton<IItemTag, ItemTagService>();
         collections.AddSingleton<ISearchLog, SearchLogService>();
         collections.AddSingleton<ITag, TagService>();
+        collections.AddSingleton<IRatingNote, RatingService>();
+
         var serviceprovider = collections.BuildServiceProvider();
         BorrowApprovalRequests = serviceprovider.GetRequiredService<IBorrowApprovalRequest>();
         BorrowRequests = serviceprovider.GetRequiredService<IBorrowRequest>();
@@ -31,7 +34,8 @@ public class DalManager
         ItemTags = serviceprovider.GetRequiredService<IItemTag>();
         SearchLogs = serviceprovider.GetRequiredService<ISearchLog>();
         Tags = serviceprovider.GetRequiredService<ITag>();
-      
+        ratingNote = serviceprovider.GetRequiredService<IRatingNote>();
+
     }
 
 }
