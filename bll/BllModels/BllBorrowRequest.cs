@@ -15,6 +15,8 @@ namespace BLL.BllModels
 
         public int UserId { get; set; }
 
+        public int RequestStatus { get; set; }
+
         public DateTime? RequestDate { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
@@ -25,8 +27,6 @@ namespace BLL.BllModels
 
         public decimal? TotalPrice { get; set; }
 
-        public virtual Item? Item { get; set; }
-
-        public virtual User User { get; set; } = null!;
+    
     }
 }

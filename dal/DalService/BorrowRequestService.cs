@@ -26,8 +26,13 @@ namespace DAL.DalService
             try
             {
                 BorrowRequest item1 = db.BorrowRequests.ToList().Find(t => t.RequestId == item.RequestId);
+<<<<<<< HEAD
                 db.BorrowRequests.Remove(item1);
                 await db.SaveChangesAsync();
+=======
+                 db.BorrowRequests.Remove(item1);
+               await db.SaveChangesAsync();
+>>>>>>> 75dbee4dcd34de6bb03d90723fe1c7e093864762
                 return true;
             }
             catch (Exception ex)

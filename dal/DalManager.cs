@@ -8,7 +8,7 @@ public class DalManager
 {
     public IBorrowApprovalRequest BorrowApprovalRequests { get; }
     public IBorrowRequest BorrowRequests { get; }
-    public IItem Items { get; }
+    public IItem items { get; }
     public IItemTag ItemTags { get; }
     public ISearchLog SearchLogs { get; }
     public ITag Tags { get; }
@@ -30,7 +30,7 @@ public class DalManager
         var serviceprovider = collections.BuildServiceProvider();
         BorrowApprovalRequests = serviceprovider.GetRequiredService<IBorrowApprovalRequest>();
         BorrowRequests = serviceprovider.GetRequiredService<IBorrowRequest>();
-        Items = serviceprovider.GetRequiredService<IItem>();
+        items = serviceprovider.GetRequiredService<IItem>();
         ItemTags = serviceprovider.GetRequiredService<IItemTag>();
         SearchLogs = serviceprovider.GetRequiredService<ISearchLog>();
         Tags = serviceprovider.GetRequiredService<ITag>();
