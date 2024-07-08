@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
@@ -7,7 +8,7 @@ namespace BLL.BllService
 {
     public class BllBorrowRequestsService : IbllBorrowRequest
     {
-        private IMapper _mapper;
+        private IMapper mapper;
         private DalManager _dalManager;
         public BllBorrowRequestsService()
         {
@@ -15,12 +16,12 @@ namespace BLL.BllService
                 cfg.AddProfile<MapperProfile>();
                 // Add any additional mapping configurations here
             });
-            _mapper = new Mapper(config);
+            mapper = new Mapper(config);
             _dalManager = new DalManager();
         }
         public BllBorrowRequestsService(IMapper mapper, DalManager dalManager)
         {
-            _mapper = mapper;
+            mapper = mapper;
             _dalManager = dalManager;
         }
         public void MapBorrowRequest()
@@ -29,14 +30,14 @@ namespace BLL.BllService
             {
                 // Set properties for bllRequest as needed
             };
-            BorrowRequest dalRequest = _mapper.Map<BorrowRequest>(bllRequest);
+            BorrowRequest dalRequest = mapper.Map<BorrowRequest>(bllRequest);
             // Use the mapped dalRequest object as needed
         }
         public async Task<bool> Create(BllBorrowRequest item)
         {
             try
             {
-                var dalRequest = _mapper.Map<BorrowRequest>(item);
+                var dalRequest = mapper.Map<BorrowRequest>(item);
                 await _dalManager.BorrowRequests.Create(dalRequest);
                 // Additional logic after adding the request
                 return true; // Return true if successful
@@ -46,26 +47,100 @@ namespace BLL.BllService
                 return false; // Return false if an exception occurred
             }
         }
-        public Task<bool> Delete(BllBorrowRequest item)
+        public async Task<bool> deletRequest(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BorrowRequest borrowRequestToDelete = await _dalManager.BorrowRequests.ReadbyId(id);
+                await _dalManager.BorrowRequests.Delete(borrowRequestToDelete);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public List<BllBorrowRequest> Read(Func<BllBorrowRequest, bool> filter)
+
+        public async Task<List<BllBorrowRequest>> getAllItemToUser(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
+                var itemIds = borrowRequests.Select(br => br.ItemId).ToList();
+                List<Item> items = await _dalManager.Items.Read(i => itemIds.Contains(i.Id));
+                return mapper.Map<List<Item>, List<BllBorrowRequest>>(items);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public Task<BllBorrowRequest> ReadbyId(int item)
+
+        public async Task<List<BllBorrowRequest>> Read(Func<BllBorrowRequest, bool> filter)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId.Equals(filter.Target.ToString()));
+                return mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public Task<List<BllBorrowRequest>> ReadAll()
+
+        public async Task<List<BllBorrowRequest>> Read(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
+                return mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+        public async Task<List<BllBorrowRequest>> ReadAll()
+        {
+            try
+            {
+                List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.ReadAll();
+                return mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<BllBorrowRequest> ReadbyId(int item)
+        {
+            try
+            {
+                BorrowRequest borrowRequest = await _dalManager.BorrowRequests.ReadbyId(item);
+                return mapper.Map<BorrowRequest, BllBorrowRequest>(borrowRequest);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Task<bool> Update(BllBorrowRequest item)
         {
             throw new NotImplementedException();
         }
-        // Implement other interface methods
+
+        public Task<bool> Delete(BllBorrowRequest item)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<BllBorrowRequest> IblCrud<BllBorrowRequest>.Read(Func<BllBorrowRequest, bool> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

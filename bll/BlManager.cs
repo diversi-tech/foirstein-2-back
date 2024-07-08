@@ -13,6 +13,8 @@ namespace BLL
 {
     public class BlManager
     {
+        public IbllBorrowRequest BorrowRequests { get; }
+
         public IbllItemTag bllItemTag { get; }
         public IbllTag bllTag { get; }
         public IbllItem bllItem { get; }
@@ -24,6 +26,7 @@ namespace BLL
 
 
             services.AddSingleton<DalManager>();
+            services.AddSingleton<IbllBorrowRequest, BllBorrowRequestsService>();
             services.AddSingleton<IbllItem, BllItemService>();
             services.AddSingleton<IbllItemTag, BllItemTagService>();
             services.AddSingleton<IbllTag, BllTagService>();
@@ -31,7 +34,8 @@ namespace BLL
 
             var serviceProvider = services.BuildServiceProvider();
 
-            bllItem = serviceProvider.GetRequiredService<IbllItem>();
+            BorrowRequests = serviceProvider.GetRequiredService<IbllBorrowRequest>();
+            bllItem = serviceProvider.GetRequiredService<IbllItem>();  
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
             bllTag = serviceProvider.GetRequiredService<IbllTag>();
             BlRatingNote = serviceProvider.GetRequiredService<IbllRatingNote>();
