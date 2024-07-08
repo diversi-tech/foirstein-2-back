@@ -18,7 +18,7 @@ namespace BLL.IBll
         public interface IBorrowRequests : IblCrud<BllBorrowRequest>
         {
             Task<List<BllBorrowRequest>> Read(int filter);
-            Task<List<BLLItem>> getAllItemToUser(int filter);
+            Task<List<BllItem>> getAllItemToUser(int filter);
             Task<bool> deletRequest(int id);
 
         }

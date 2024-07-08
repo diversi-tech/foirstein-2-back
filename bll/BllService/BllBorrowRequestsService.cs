@@ -33,6 +33,7 @@ namespace BLL.BllService
             BorrowRequest dalRequest = mapper.Map<BorrowRequest>(bllRequest);
             // Use the mapped dalRequest object as needed
         }
+
         public async Task<bool> Create(BllBorrowRequest item)
         {
             try
@@ -47,6 +48,7 @@ namespace BLL.BllService
                 return false; // Return false if an exception occurred
             }
         }
+       
         public async Task<bool> deletRequest(int id)
         {
             try

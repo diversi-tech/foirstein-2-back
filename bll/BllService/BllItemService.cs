@@ -50,7 +50,7 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        public List<BllItem> Read(Func<BllItem, bool> filter)
+        public Task<List<BllItem>> Read(Func<BllItem, bool> filter)
         {
             throw new NotImplementedException();
         }
@@ -86,9 +86,6 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        Task<List<BllItem>> IblCrud<BllItem>.Read(Func<BllItem, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

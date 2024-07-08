@@ -90,7 +90,7 @@ namespace BLL.BllServices
             throw new NotImplementedException();
         }
 
-        public List<BllRatingNote> Read(Func<BllRatingNote, bool> filter)
+        public Task<List<BllRatingNote>> Read(Func<BllRatingNote, bool> filter)
         {
             throw new NotImplementedException();
         }
@@ -105,9 +105,6 @@ namespace BLL.BllServices
             throw new NotImplementedException();
         }
 
-        Task<List<BllRatingNote>> IblCrud<BllRatingNote>.Read(Func<BllRatingNote, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }
