@@ -35,7 +35,17 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
+        public Task<bool> Create(BllItem item)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> Delete(BLLItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Delete(BllItem item)
         {
             throw new NotImplementedException();
         }
@@ -51,6 +61,11 @@ namespace BLL.BllService
             return mapper.Map<List<Item>, List<BLLItem>>(items);
         }
 
+        public Task<List<BllItem>> Read(Func<BllItem, bool> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<BLLItem>> ReadAll()
         {
             throw new NotImplementedException();
@@ -62,7 +77,27 @@ namespace BLL.BllService
             return mapper.Map<Item , BLLItem> (item);
         }
 
+        public Task<IEnumerable<BllItem>> ReadByString(string searchKey)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> Update(BLLItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Update(BllItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<BllItem>> IblCrud<BllItem>.ReadAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<BllItem> IblCrud<BllItem>.ReadbyId(int item)
         {
             throw new NotImplementedException();
         }

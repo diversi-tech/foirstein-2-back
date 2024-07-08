@@ -105,5 +105,9 @@ namespace BLL.BllServices
             throw new NotImplementedException();
         }
 
+        Task<List<BllRatingNote>> IblCrud<BllRatingNote>.Read(Func<BllRatingNote, bool> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

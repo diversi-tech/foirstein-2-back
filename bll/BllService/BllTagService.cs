@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
@@ -96,6 +97,11 @@ namespace BLL.BllService
 
 
         public Task<bool> Update(BllTag item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<BllTag>> IblCrud<BllTag>.Read(Func<BllTag, bool> filter)
         {
             throw new NotImplementedException();
         }

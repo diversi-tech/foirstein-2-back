@@ -67,7 +67,7 @@ namespace BLL.BllService
             {
                 List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
                 var itemIds = borrowRequests.Select(br => br.ItemId).ToList();
-                List<Item> items = await _dalManager.Items.Read(i => itemIds.Contains(i.Id));
+                List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllBorrowRequest>>(items);
             }
             catch (Exception ex)
@@ -138,9 +138,6 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        List<BllBorrowRequest> IblCrud<BllBorrowRequest>.Read(Func<BllBorrowRequest, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

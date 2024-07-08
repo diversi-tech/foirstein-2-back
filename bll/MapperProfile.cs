@@ -15,7 +15,6 @@ namespace BLL
     {
         public MapperProfile()
         {
-<<<<<<< HEAD
 
             CreateMap<BorrowRequest,BllBorrowRequest>().ReverseMap();
             CreateMap<ItemTag,BllItemTag>().ReverseMap();
@@ -25,11 +24,7 @@ namespace BLL
 
 
         
-=======
-            CreateMap<BorrowRequest, BllBorrowRequest>().ReverseMap();
-            CreateMap<Item, BLLItem>().ReverseMap();
->>>>>>> 75dbee4dcd34de6bb03d90723fe1c7e093864762
-        }
+       }
 
 
     }

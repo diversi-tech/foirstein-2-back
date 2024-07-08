@@ -12,20 +12,13 @@ namespace DAL.DalService
 {
     public class ItemService : IItem
     {
-<<<<<<< HEAD
         private LiberiansDbContext _context;
 
         public ItemService(LiberiansDbContext context)
         {
             _context = context;
-=======
-        private LiberiansDbContext db;
-
-        public ItemService(LiberiansDbContext db)
-        {
-            this.db = db;
->>>>>>> 75dbee4dcd34de6bb03d90723fe1c7e093864762
-        }
+            }
+     
         public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
@@ -35,9 +28,9 @@ namespace DAL.DalService
         {
             try
             {
-                Item item1 = db.Items.ToList().Find(t => t.Id == item.Id);
-                db.Items.Remove(item1);
-                await db.SaveChangesAsync();
+                Item item1 = _context.Items.ToList().Find(t => t.Id == item.Id);
+                _context.Items.Remove(item1);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -46,7 +39,6 @@ namespace DAL.DalService
             }
         }
 
-<<<<<<< HEAD
         public async Task<IEnumerable<Item>> ReadByString(string searchKey)
         {
            return 
@@ -57,22 +49,20 @@ namespace DAL.DalService
 
         }
 
-        public Task<List<Item>> Read(Func<Item, bool> filter)
-=======
+
         public async Task<List<Item>> Read(Func<Item, bool> filter)
->>>>>>> 75dbee4dcd34de6bb03d90723fe1c7e093864762
         {
-            return db.Items.Where(filter).ToList();
+            return _context.Items.Where(filter).ToList();
         }
 
        
 
-        public async Task<List<Item>> ReadAll() => db.Items.ToList();
+        public async Task<List<Item>> ReadAll() => _context.Items.ToList();
 
 
         public async Task<Item> ReadbyId(int idItem)
         {
-            Item? item = db.Items.ToList().Find(t => t.Id == idItem);
+            Item? item = _context.Items.ToList().Find(t => t.Id == idItem);
             return item;
         }
 
