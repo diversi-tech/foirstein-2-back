@@ -11,32 +11,54 @@ namespace DAL.DalService
 {
     public class ItemService : IItem
     {
+        private LiberiansDbContext db;
+
+        public ItemService(LiberiansDbContext db)
+        {
+            this.db = db;
+        }
         public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Item item)
+        public async Task<bool> Delete(Item item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Item item1 = db.Items.ToList().Find(t => t.Id == item.Id);
+                db.Items.Remove(item1);
+                await db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<List<Item>> Read(Func<Item, bool> filter)
+        public async Task<List<Item>> Read(Func<Item, bool> filter)
         {
-            throw new NotImplementedException();
+            return db.Items.Where(filter).ToList();
         }
 
-        public Task<List<Item>> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
+       
 
-        public Task<Item> ReadbyId(int item)
+        public async Task<List<Item>> ReadAll() => db.Items.ToList();
+
+
+        public async Task<Item> ReadbyId(int idItem)
         {
-            throw new NotImplementedException();
+            Item? item = db.Items.ToList().Find(t => t.Id == idItem);
+            return item;
         }
 
         public Task<bool> Update(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Item>> ICrud<Item>.ReadAll()
         {
             throw new NotImplementedException();
         }

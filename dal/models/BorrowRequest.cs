@@ -11,6 +11,8 @@ public partial class BorrowRequest
 
     public int UserId { get; set; }
 
+    public int RequestStatus { get; set; }
+
     public DateTime? RequestDate { get; set; }
 
     public DateTime? ApprovalDate { get; set; }

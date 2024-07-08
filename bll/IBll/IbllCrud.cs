@@ -6,7 +6,7 @@ public interface IblCrud<T>
 
     Task<bool> Delete(T item);
 
-    List<T> Read(Func<T, bool> filter);
+    Task<List<T>> Read(Func<T, bool> filter);
 
     Task<T> ReadbyId(int item);
 
