@@ -12,5 +12,7 @@ namespace BLL.IBll
     public interface IbllItem : IblCrud<BllItem>
     {
         Task<IEnumerable<BllItem>> ReadByString(String searchKey);
+        Task<IEnumerable<BllItem>> ReadByCategory(String category);
+
     }
 }
