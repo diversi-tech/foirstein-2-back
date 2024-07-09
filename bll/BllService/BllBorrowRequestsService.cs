@@ -4,6 +4,7 @@ using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
 using DAL;
+using static BLL.Exeptions.BorrowRequestExeptions;
 namespace BLL.BllService
 {
     public class BllBorrowRequestsService : IbllBorrowRequest
@@ -14,7 +15,6 @@ namespace BLL.BllService
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.AddProfile<MapperProfile>();
-                // Add any additional mapping configurations here
             });
             mapper = new Mapper(config);
             _dalManager = new DalManager();
@@ -38,17 +38,51 @@ namespace BLL.BllService
         {
             try
             {
+                int itemId = item.ItemId ?? 0;
                 var dalRequest = mapper.Map<BorrowRequest>(item);
-                await _dalManager.BorrowRequests.Create(dalRequest);
-                // Additional logic after adding the request
-                return true; // Return true if successful
+
+                //List<BorrowRequest> allBorrowRequests = await _dalManager.BorrowRequests.ReadAll();
+
+                //List<BorrowRequest> itemBorrowRequests = allBorrowRequests.Where(br => br.ItemId == item.ItemId).ToList();
+
+                //foreach (var existingRequest in itemBorrowRequests)
+                //{
+                //    if (item.FromDate < existingRequest.UntilDate && item.UntilDate > existingRequest.FromDate)
+                //    {
+                //        throw new ItemTakenException();
+                //    }
+                //}
+
+                if (dalRequest != null)
+                {
+                    TimeSpan borrowDuration = item.UntilDate.Value.Subtract(item.FromDate.Value);
+
+                    if (borrowDuration.Days > 7)
+                    {
+                        throw new MaximumBorrowDurationExceededException();
+                    }
+                    else if (item.FromDate >= item.UntilDate)
+                    {
+                        throw new InvalidLoanDatesException();
+                    }
+                    else
+                    {
+                        await _dalManager.BorrowRequests.Create(dalRequest);
+                        return true; // Return true if successful
+                    }
+                }
+                else
+                {
+                    throw new Exception("Item not found");
+                }
             }
             catch (Exception ex)
             {
+                // Log the exception or perform error handling
                 return false; // Return false if an exception occurred
             }
         }
-       
+
         public async Task<bool> deletRequest(int id)
         {
             try

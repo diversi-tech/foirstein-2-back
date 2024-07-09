@@ -16,9 +16,20 @@ namespace DAL.DalService
         {
             this.db = db;
         }
-        public Task<bool> Create(BorrowRequest item)
+        public async Task<bool> Create(BorrowRequest item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await db.BorrowRequests.AddAsync(item);
+                await db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating loan request: {ex.Message}");
+                return false;
+            }
         }
 
         public async Task<bool> Delete(BorrowRequest item)
