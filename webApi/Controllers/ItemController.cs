@@ -25,7 +25,7 @@ namespace WEBAPI.Controllers
             _ibllItem = blManager.bllItem;
         }
 
-        [HttpGet("/ReadByString/{searchKey}")]
+        [HttpGet("ReadByString/{searchKey}")]
         public async Task<IEnumerable<BllItem>> ReadByString(string searchKey)
         {
             try
@@ -34,12 +34,12 @@ namespace WEBAPI.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("An error occurred while fetching items by searchKey.", ex);
             }
 
         }
 
-        [HttpGet("/ReadByCategory/{category}")]
+        [HttpGet("ReadByCategory/{category}")]
         public async Task<IEnumerable<BllItem>> ReadByCategory(string category)
         {
             try
