@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
@@ -49,7 +50,7 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        public List<BllItem> Read(Func<BllItem, bool> filter)
+        public Task<List<BllItem>> Read(Func<BllItem, bool> filter)
         {
             throw new NotImplementedException();
         }
@@ -68,7 +69,7 @@ namespace BLL.BllService
         {
             try
             {
-                var dalItem = await _dalManager.Items.ReadByString(searchKey);
+                var dalItem = await _dalManager.items.ReadByString(searchKey);
 
                 var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
 
@@ -84,5 +85,7 @@ namespace BLL.BllService
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

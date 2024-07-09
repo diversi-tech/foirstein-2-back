@@ -6,6 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+﻿
+using BLL;
+using DAL;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 namespace WEBAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -34,3 +40,6 @@ namespace WEBAPI.Controllers
         }
     }
 }
+
+
+    

@@ -1,5 +1,6 @@
 ﻿using dal.models;
 using DAL.IDal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,62 @@ namespace DAL.DalService
 {
     public class BorrowRequestService : IBorrowRequest
     {
+        private LiberiansDbContext db;
+        public BorrowRequestService(LiberiansDbContext db)
+        {
+            this.db = db;
+        }
         public Task<bool> Create(BorrowRequest item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(BorrowRequest item)
+        public async Task<bool> Delete(BorrowRequest item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BorrowRequest item1 = db.BorrowRequests.ToList().Find(t => t.RequestId == item.RequestId);
+                db.BorrowRequests.Remove(item1);
+                await db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
         }
 
-        public Task<List<BorrowRequest>> Read(Func<BorrowRequest, bool> filter)
+
+        public async Task<List<BorrowRequest>> Read(Func<BorrowRequest, bool> filter)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.BorrowRequests.Where(filter).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<List<BorrowRequest>> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<BorrowRequest> ReadbyId(int item)
+        public async Task<List<BorrowRequest>> ReadAll() => db.BorrowRequests.ToList();
+
+        public async Task<BorrowRequest> ReadbyId(int item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BorrowRequest? itemReqest = db.BorrowRequests.ToList().Find(t => t.RequestId == item);
+
+                return itemReqest;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<bool> Update(BorrowRequest item)

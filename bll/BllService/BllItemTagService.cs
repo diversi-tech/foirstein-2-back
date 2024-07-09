@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
@@ -50,7 +51,7 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        public List<BllItemTag> Read(Func<BllItemTag, bool> filter)
+        public Task<List<BllItemTag>> Read(Func<BllItemTag, bool> filter)
         {
             throw new NotImplementedException();
         }
@@ -85,6 +86,8 @@ namespace BLL.BllService
         {
             throw new NotImplementedException();
         }
+
+       
     }
 
 }

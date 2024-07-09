@@ -17,15 +17,26 @@ namespace DAL.DalService
         public ItemService(LiberiansDbContext context)
         {
             _context = context;
-        }
+            }
+     
         public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Item item)
+        public async Task<bool> Delete(Item item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Item item1 = _context.Items.ToList().Find(t => t.Id == item.Id);
+                _context.Items.Remove(item1);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<IEnumerable<Item>> ReadByString(string searchKey)
@@ -38,22 +49,29 @@ namespace DAL.DalService
 
         }
 
-        public Task<List<Item>> Read(Func<Item, bool> filter)
+
+        public async Task<List<Item>> Read(Func<Item, bool> filter)
         {
-            throw new NotImplementedException();
+            return _context.Items.Where(filter).ToList();
         }
 
-        public Task<List<Item>> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
+       
 
-        public Task<Item> ReadbyId(int item)
+        public async Task<List<Item>> ReadAll() => _context.Items.ToList();
+
+
+        public async Task<Item> ReadbyId(int idItem)
         {
-            throw new NotImplementedException();
+            Item? item = _context.Items.ToList().Find(t => t.Id == idItem);
+            return item;
         }
 
         public Task<bool> Update(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Item>> ICrud<Item>.ReadAll()
         {
             throw new NotImplementedException();
         }
