@@ -17,8 +17,8 @@ namespace DAL.DalService
         public ItemService(LiberiansDbContext context)
         {
             _context = context;
-            }
-     
+        }
+
         public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
@@ -41,11 +41,12 @@ namespace DAL.DalService
 
         public async Task<IEnumerable<Item>> ReadByString(string searchKey)
         {
-           return 
-                _context.Items.Where(item => EF.Functions.Like(item.Title, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Description, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Category, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Author, "%" + searchKey + "%")).ToList();
+
+            return
+            _context.Items.Where(item => EF.Functions.Like(item.Title, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Description, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Category, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Author, "%" + searchKey + "%")).ToList();
 
         }
 
@@ -55,7 +56,7 @@ namespace DAL.DalService
             return _context.Items.Where(filter).ToList();
         }
 
-       
+
 
         public async Task<List<Item>> ReadAll() => _context.Items.ToList();
 
@@ -74,6 +75,11 @@ namespace DAL.DalService
         Task<List<Item>> ICrud<Item>.ReadAll()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Item>> ReadByCategory(string category)
+        {
+            return _context.Items.Where(item => item.Category == category).ToList();
         }
     }
 }
