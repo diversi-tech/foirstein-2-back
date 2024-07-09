@@ -44,6 +44,7 @@ namespace WEBAPI.Controllers
         {
             try
             {
+                Console.WriteLine(default(DateTime));
                 var result = await _ibllItem.ReadByCategory(category);
                 return result;
             }
@@ -52,8 +53,21 @@ namespace WEBAPI.Controllers
                 throw new Exception("An error occurred while fetching items by category.", ex);
             }
         }
+
+        [HttpPost("ReadByAttributes")]
+        public async Task<IEnumerable<BllItem>> ReadByAttributes([FromBody] BllItem searchItem)
+        {
+            try
+            {
+                return await _ibllItem.ReadByAttributes(searchItem);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
+}
 
 
     

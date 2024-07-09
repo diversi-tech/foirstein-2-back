@@ -81,5 +81,19 @@ namespace DAL.DalService
         {
             return _context.Items.Where(item => item.Category == category).ToList();
         }
+
+
+        public async Task<IEnumerable<Item>> ReadByAttributes(Item searchItem)
+        {
+            return _context.Items.Where(item =>
+                (string.IsNullOrEmpty(searchItem.Title) || item.Title.Contains(searchItem.Title)) &&
+                (string.IsNullOrEmpty(searchItem.Author) || item.Author.Contains(searchItem.Author)) &&
+                (string.IsNullOrEmpty(searchItem.Description) || item.Description.Contains(searchItem.Description)) &&
+                (string.IsNullOrEmpty(searchItem.Category) || item.Category.Contains(searchItem.Category)) &&
+                (!searchItem.CreatedAt.Equals(default(DateTime)) || item.CreatedAt == searchItem.CreatedAt));
+
+        }
+
+
     }
 }
