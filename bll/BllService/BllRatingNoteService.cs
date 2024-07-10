@@ -1,36 +1,28 @@
 ﻿using AutoMapper;
-using BL;
 using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
-
 using dal.models;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BLL.BllServices
 {
-    public class BllRatingService:IbllRatingNote
+    public class BllRatingNoteService : IbllRatingNote
     {
         private IMapper _mapper;
         private readonly DalManager _dalManager;
 
-        public BllRatingService()
+        public BllRatingNoteService()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<MapperProfile>();
-                // Add any additional mapping configurations here
             });
             _mapper = new Mapper(config);
             _dalManager = new DalManager();
         }
 
-        public BllRatingService(IMapper mapper, DalManager dalManager)
+        public BllRatingNoteService(IMapper mapper, DalManager dalManager)
         {
             _mapper = mapper;
             _dalManager = dalManager;
@@ -38,36 +30,58 @@ namespace BLL.BllServices
 
         public async Task<BllRatingNote> getRatingNote(int userId, int itemId)
         {
-            RatingNote matchingRatingNote = await _dalManager.ratingNote.GetByUserAndItem(userId, itemId);
+            try
+            {
+                RatingNote matchingRatingNote = await _dalManager.ratingNote.GetByUserAndItem(userId, itemId);
 
-            if (matchingRatingNote != null)
-            {
-                //return await casting(matchingRatingNote);
-                return _mapper.Map<BllRatingNote>(matchingRatingNote);
+                if (matchingRatingNote != null)
+                {
+                    return _mapper.Map<BllRatingNote>(matchingRatingNote);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
-          public async Task<bool> Update(BllRatingNote ratingNote)
+        public async Task<bool> Update(BllRatingNote ratingNote)
         {
-            RatingNote matchingRatingNote = await _dalManager.ratingNote.GetByUserAndItem(ratingNote.UserId, ratingNote.ItemId??0);
+            try
+            {
+                if (ratingNote.Rating.HasValue && (ratingNote.Rating < 0 || ratingNote.Rating > 5))
+                {
+                    throw new Exception("rating must be between 0 to 5");
+                }
 
-            if (matchingRatingNote != null)
-            {
-                //RatingNote newRatingNote = _mapper.Map<RatingNote>(ratingNote);
-                matchingRatingNote.Rating = ratingNote.Rating;
-                matchingRatingNote.Note = ratingNote.Note;
-                bool b = await _dalManager.ratingNote.Update(matchingRatingNote);
+                if (ratingNote.Note != null && ratingNote.Note.Length > 255)
+                {
+                    throw new Exception("note can be maximum 255 chars");
+                }
+
+                RatingNote matchingRatingNote = await _dalManager.ratingNote.GetByUserAndItem(ratingNote.UserId, ratingNote.ItemId ?? 0);
+
+                if (matchingRatingNote != null)
+                {
+                    matchingRatingNote.Rating = ratingNote.Rating;
+                    matchingRatingNote.Note = ratingNote.Note;
+                    bool b = await _dalManager.ratingNote.Update(matchingRatingNote);
+                }
+                else
+                {
+                    RatingNote newRatingNote = _mapper.Map<RatingNote>(ratingNote);
+                    await _dalManager.ratingNote.Create(newRatingNote);
+                }
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                RatingNote newRatingNote = _mapper.Map<RatingNote>(ratingNote);
-                bool b= await _dalManager.ratingNote.Create(newRatingNote);
+                throw new Exception(ex.Message);
             }
-            return true;
         }
 
         public Task<bool> Create(BllRatingNote item)
@@ -105,6 +119,5 @@ namespace BLL.BllServices
             throw new NotImplementedException();
         }
 
-     
     }
 }

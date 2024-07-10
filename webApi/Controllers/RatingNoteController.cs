@@ -27,9 +27,9 @@ namespace webApi.Controllers
             {
                 return await _rating.getRatingNote(userId, itemId);
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while processing the rating.");
+                return StatusCode(500, "An error occurred while updating the rating note: " + ex.Message);
             }
         }
 
@@ -39,11 +39,11 @@ namespace webApi.Controllers
         {
             try
             {
-                return await _rating.Update( rating);
+                return await _rating.Update(rating);
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while processing the rating.");
+                return StatusCode(500, "An error occurred while updating the rating note: " + ex.Message);
             }
         }
 
