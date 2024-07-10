@@ -34,7 +34,7 @@ namespace BLL
             services.AddSingleton<IbllItem, BllItemService>();
             services.AddSingleton<IbllItemTag, BllItemTagService>();
             services.AddSingleton<IbllTag, BllTagService>();
-            services.AddSingleton<IbllRatingNote, BllRatingService>();
+            services.AddSingleton<IbllRatingNote, BllRatingNoteService>();
 
       
 

@@ -10,10 +10,10 @@ using DAL.IDal;
 
 namespace DAL.DalService
 {
-    public class RatingService:IRatingNote
+    public class RatingNoteService : IRatingNote
     {
         LiberiansDbContext libraryContext;
-        public RatingService(LiberiansDbContext libraryContext)
+        public RatingNoteService(LiberiansDbContext libraryContext)
         {
 
             this.libraryContext = libraryContext;
@@ -22,20 +22,27 @@ namespace DAL.DalService
 
         public async Task<RatingNote> GetByUserAndItem(int userId, int itemId)
         {
-            return await libraryContext.RatingNotes.FirstOrDefaultAsync(r => r.UserId == userId && r.ItemId == itemId);
+            try
+            {
+                return await libraryContext.RatingNotes.FirstOrDefaultAsync(r => r.UserId == userId && r.ItemId == itemId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> Create(RatingNote item)
         {
             try
             {
-                libraryContext.RatingNotes.Add(item);
+                await libraryContext.RatingNotes.AddAsync(item);
                 await libraryContext.SaveChangesAsync();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -60,16 +67,23 @@ namespace DAL.DalService
 
         public async Task<bool> Update(RatingNote item)
         {
-            int i = libraryContext.RatingNotes.ToList().FindIndex(r => r.RatingNoteId == item.RatingNoteId);
-            if (i != -1)
+            try
             {
-                var item1 = libraryContext.RatingNotes.ToList()[i];
-                item1.Rating = item.Rating;
-                item1.Note = item.Note;
-                await libraryContext.SaveChangesAsync();
-                return true;
+                int i = libraryContext.RatingNotes.ToList().FindIndex(r => r.RatingNoteId == item.RatingNoteId);
+                if (i != -1)
+                {
+                    var item1 = libraryContext.RatingNotes.ToList()[i];
+                    item1.Rating = item.Rating;
+                    item1.Note = item.Note;
+                    await libraryContext.SaveChangesAsync();
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
 
