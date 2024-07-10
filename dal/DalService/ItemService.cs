@@ -90,7 +90,7 @@ namespace DAL.DalService
                 (string.IsNullOrEmpty(searchItem.Author) || item.Author.Contains(searchItem.Author)) &&
                 (string.IsNullOrEmpty(searchItem.Description) || item.Description.Contains(searchItem.Description)) &&
                 (string.IsNullOrEmpty(searchItem.Category) || item.Category.Contains(searchItem.Category)) &&
-                (!searchItem.CreatedAt.Equals(default(DateTime)) || item.CreatedAt == searchItem.CreatedAt));
+                (searchItem.CreatedAt.Equals(default(DateTime)) || item.CreatedAt == searchItem.CreatedAt));
 
         }
 
