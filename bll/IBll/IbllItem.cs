@@ -13,6 +13,8 @@ namespace BLL.IBll
     {
         Task<IEnumerable<BllItem>> ReadByString(String searchKey);
         Task<IEnumerable<BllItem>> ReadByCategory(String category);
+        Task<IEnumerable<BllItem>> ReadByAttributes(BllItem searchItem);
+
 
     }
 }
