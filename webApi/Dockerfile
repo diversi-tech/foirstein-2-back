@@ -15,11 +15,11 @@ COPY ["dal/DAL.csproj", "dal/"]
 RUN dotnet restore "./webApi/WEBAPI.csproj"
 COPY . .
 WORKDIR "/src/webApi"
-RUN dotnet build "./WEBAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./WEBAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build --force
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./WEBAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./WEBAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --force
 
 FROM base AS final
 WORKDIR /app
