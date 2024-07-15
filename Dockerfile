@@ -74,55 +74,25 @@
 
 
 
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-# FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-# EXPOSE 80
-# EXPOSE 443
-# FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-# WORKDIR /src
-# COPY ["webApi/webApi.csproj", "webApi/"]
-# COPY ["bll/bll.csproj", "bll/"]
-# COPY ["dal/dal.csproj", "dal/"]
-# RUN dotnet restore "webApi/webApi.csproj" --force
-# COPY . .
-# WORKDIR "/src/webApi"
-# RUN dotnet build "webApi.csproj" -c Release -o /app/build --force
-# FROM build AS publish
-# RUN dotnet publish "webApi.csproj" -c Release -o /app/publish --force
-# FROM base AS final 
-# WORKDIR /app
-# COPY --from=publish /app/publish .
-# ENTRYPOINT ["dotnet", "webApi.dll"]
-
-
-# Use the ASP.NET Core runtime as a base image
+See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 EXPOSE 80
 EXPOSE 443
-
-# Use the .NET SDK for building the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-
-# Copy the project files and restore dependencies
 COPY ["webApi/webApi.csproj", "webApi/"]
 COPY ["bll/bll.csproj", "bll/"]
-COPY ["dal/dal.csproj", "dal/"]
+# COPY ["dal/dal.csproj", "dal/"]
 RUN dotnet restore "webApi/webApi.csproj" --force
-
-# Copy the remaining files and build the project
 COPY . .
 WORKDIR "/src/webApi"
 RUN dotnet build "webApi.csproj" -c Release -o /app/build --force
-
-# Publish the application
 FROM build AS publish
 RUN dotnet publish "webApi.csproj" -c Release -o /app/publish --force
-
-# Build the final runtime image
 FROM base AS final 
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "webApi.dll"]
+
 
 
