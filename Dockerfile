@@ -94,6 +94,7 @@
 # COPY --from=publish /app/publish .
 # ENTRYPOINT ["dotnet", "webApi.dll"]
 
+
 # Use the ASP.NET Core runtime as a base image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 EXPOSE 80
@@ -107,7 +108,7 @@ WORKDIR /src
 COPY ["webApi/webApi.csproj", "webApi/"]
 COPY ["bll/bll.csproj", "bll/"]
 COPY ["dal/dal.csproj", "dal/"]
-RUN dotnet restore --force
+RUN dotnet restore "webApi/webApi.csproj" --force
 
 # Copy the remaining files and build the project
 COPY . .
@@ -123,4 +124,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "webApi.dll"]
+
 
