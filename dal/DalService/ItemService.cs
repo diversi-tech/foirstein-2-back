@@ -17,8 +17,8 @@ namespace DAL.DalService
         public ItemService(LiberiansDbContext context)
         {
             _context = context;
-            }
-     
+        }
+
         public Task<bool> Create(Item item)
         {
             throw new NotImplementedException();
@@ -41,11 +41,12 @@ namespace DAL.DalService
 
         public async Task<IEnumerable<Item>> ReadByString(string searchKey)
         {
-           return 
-                _context.Items.Where(item => EF.Functions.Like(item.Title, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Description, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Category, "%" + searchKey + "%") ||
-                                            EF.Functions.Like(item.Author, "%" + searchKey + "%")).ToList();
+
+            return
+            _context.Items.Where(item => EF.Functions.Like(item.Title, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Description, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Category, "%" + searchKey + "%") ||
+                                        EF.Functions.Like(item.Author, "%" + searchKey + "%")).ToList();
 
         }
 
@@ -55,7 +56,7 @@ namespace DAL.DalService
             return _context.Items.Where(filter).ToList();
         }
 
-       
+
 
         public async Task<List<Item>> ReadAll() => _context.Items.ToList();
 
@@ -75,5 +76,24 @@ namespace DAL.DalService
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Item>> ReadByCategory(string category)
+        {
+            return _context.Items.Where(item => item.Category == category).ToList();
+        }
+
+
+        public async Task<IEnumerable<Item>> ReadByAttributes(Item searchItem)
+        {
+            return _context.Items.Where(item =>
+                (string.IsNullOrEmpty(searchItem.Title) || item.Title.Contains(searchItem.Title)) &&
+                (string.IsNullOrEmpty(searchItem.Author) || item.Author.Contains(searchItem.Author)) &&
+                (string.IsNullOrEmpty(searchItem.Description) || item.Description.Contains(searchItem.Description)) &&
+                (string.IsNullOrEmpty(searchItem.Category) || item.Category.Contains(searchItem.Category)) &&
+                (searchItem.CreatedAt.Equals(default(DateTime)) || item.CreatedAt == searchItem.CreatedAt));
+
+        }
+
+
     }
 }

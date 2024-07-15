@@ -25,7 +25,7 @@ public class DalManager
         collections.AddSingleton<IItemTag, ItemTagService>();
         collections.AddSingleton<ISearchLog, SearchLogService>();
         collections.AddSingleton<ITag, TagService>();
-        collections.AddSingleton<IRatingNote, RatingService>();
+        collections.AddSingleton<IRatingNote, RatingNoteService>();
 
         var serviceprovider = collections.BuildServiceProvider();
         BorrowApprovalRequests = serviceprovider.GetRequiredService<IBorrowApprovalRequest>();

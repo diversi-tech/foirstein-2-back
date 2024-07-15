@@ -77,15 +77,45 @@ namespace BLL.BllService
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to fetch ItemTags", ex);
+                throw new Exception("Failed to fetch Items", ex);
             }
         }
+        public async Task<IEnumerable<BllItem>> ReadByAttributes(BllItem searchItem)
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadByAttributes(_mapper.Map<Item>(searchItem));
 
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Items by attributes", ex);
+            }
+        }
         public Task<bool> Update(BllItem item)
         {
             throw new NotImplementedException();
         }
 
-       
+        public async Task<IEnumerable<BllItem>> ReadByCategory(string category)
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadByCategory(category);
+
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch ItemTags", ex);
+            }
+        }
+
+
     }
 }

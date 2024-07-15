@@ -26,7 +26,7 @@ builder.Services.AddControllers();
 /*builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactCorsPolicy",
-        builder => builder.WithOrigins("http://localhost:3000")
+        builder => builder.WithOrigins("*")
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
