@@ -11,6 +11,8 @@ namespace WEBAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+
     public class BorrowRequestController : ControllerBase
     {
         private readonly BlManager _blManager;
@@ -86,6 +88,18 @@ namespace WEBAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
             }
         }
+       
+        [HttpGet("getBorrowRequestsAndApprovals/{Id}")]
+        public async Task<IActionResult> GetBorrowRequestsAndApprovals(int Id)
+        {
+            try
+            {
+                var result = await _blManager.BorrowRequests.GetBorrowRequestsAndApprovals(Id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
         [HttpPost]
         [Route("AddBorrowRequest")]
         public async Task<ActionResult<bool>> AddBorrowRequest(BllBorrowRequest borrowRequest)

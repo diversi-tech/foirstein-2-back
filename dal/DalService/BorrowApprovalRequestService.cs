@@ -10,6 +10,11 @@ namespace DAL.DalService
 {
     public class BorrowApprovalRequestService : IBorrowApprovalRequest
     {
+        private LiberiansDbContext db;
+        public BorrowApprovalRequestService(LiberiansDbContext db)
+        {
+            this.db = db;
+        }
         public Task<bool> Create(BorrowApprovalRequest item)
         {
             throw new NotImplementedException();
@@ -20,20 +25,34 @@ namespace DAL.DalService
             throw new NotImplementedException();
         }
 
-        public Task<List<BorrowApprovalRequest>> Read(Func<BorrowApprovalRequest, bool> filter)
+        public async Task<List<BorrowApprovalRequest>> Read(Func<BorrowApprovalRequest, bool> filter)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.BorrowApprovalRequests.Where(filter).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<List<BorrowApprovalRequest>> ReadAll()
+        public async Task<List<BorrowApprovalRequest>> ReadAll() => db.BorrowApprovalRequests.ToList();
+
+        public async Task<BorrowApprovalRequest> ReadbyId(int item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                BorrowApprovalRequest? itemReqest = db.BorrowApprovalRequests.ToList().Find(t => t.RequestId == item);
+
+                return itemReqest;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<BorrowApprovalRequest> ReadbyId(int item)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<bool> Update(BorrowApprovalRequest item)
         {

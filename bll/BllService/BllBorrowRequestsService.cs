@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using AutoMapper.Internal;
 using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
 using DAL;
+using DAL.IDal;
+using System.Linq;
+
 using static BLL.Exeptions.BorrowRequestExeptions;
+
 namespace BLL.BllService
 {
     public class BllBorrowRequestsService : IbllBorrowRequest
@@ -13,7 +18,8 @@ namespace BLL.BllService
         private DalManager _dalManager;
         public BllBorrowRequestsService()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<MapperProfile>();
             });
             mapper = new Mapper(config);
@@ -97,14 +103,39 @@ namespace BLL.BllService
             }
         }
 
-        public async Task<List<BllBorrowRequest>> getAllItemToUser(int userId)
+        public async Task<List<BllItem>> getAllItemToUser(int userId)
         {
             try
             {
+                List<BorrowApprovalRequest> borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.UserId == userId);
                 List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
-                var itemIds = borrowRequests.Select(br => br.ItemId).ToList();
+
+                /*   var itemIds = borrowRequests.Select(br => br.ItemId)
+                                               .Concat(borrowApprovalRequests.Select(br => br.ItemId))
+                                               .Distinct() .ToList();*/
+                /*   var itemIds = borrowApprovalRequests.Select(bar => bar.ItemId).ToList();
+                    itemIds.AddRange((IEnumerable<int>)borrowRequests.Select(br => br.ItemId));
+    */
+
+                List<int> itemIds = new List<int>();
+
+                foreach (var borrowApprovalRequest in borrowApprovalRequests)
+                {
+                      itemIds.Add(borrowApprovalRequest.ItemId);
+                 
+                }
+
+                foreach (var borrowRequest in borrowRequests)
+                {
+                     itemIds.Add(borrowRequest.ItemId.Value);
+               
+                }
+
+                // קריאת רשימת הפריטים לפי itemIds
+/*                List<Item> items = await _dalManager.Items.Read(i => itemIds.Contains(i.Id));
+*/
                 List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
-                return mapper.Map<List<Item>, List<BllBorrowRequest>>(items);
+                return mapper.Map<List<Item>, List<BllItem>>(items);
             }
             catch (Exception ex)
             {
@@ -118,6 +149,31 @@ namespace BLL.BllService
             {
                 List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId.Equals(filter.Target.ToString()));
                 return mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<dynamic> GetBorrowRequestsAndApprovals(int userId)
+        {
+            try
+            {
+                var borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.UserId == userId);
+                var borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
+
+                var mappedBorrowApprovalRequests = mapper.Map<List<BorrowApprovalRequest>, List<BllBorrowApprovalRequest>>(borrowApprovalRequests);
+                var mappedBorrowRequests = mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+
+                var result = new
+                {
+                    BorrowApprovalRequests = mappedBorrowApprovalRequests,
+                    BorrowRequests = mappedBorrowRequests
+                };
+
+                return result;
+
             }
             catch (Exception ex)
             {
@@ -174,6 +230,6 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-      
+
     }
 }
