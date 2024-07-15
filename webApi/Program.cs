@@ -12,6 +12,8 @@ builder.Services.AddSingleton<BlManager>();
 
 builder.Services.AddControllers();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Configure CORS
 builder.Services.AddCors(options =>
 {
