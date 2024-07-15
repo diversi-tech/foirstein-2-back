@@ -83,13 +83,13 @@ WORKDIR /src
 COPY ["webApi/webApi.csproj", "webApi/"]
 COPY ["bll/bll.csproj", "bll/"]
 COPY ["dal/dal.csproj", "dal/"]
-RUN dotnet restore "webApi/webApi.csproj"
+RUN dotnet restore "webApi/webApi.csproj" --force
 COPY . .
 WORKDIR "/src/webApi"
-RUN dotnet build "webApi.csproj" -c Release -o /app/build
+RUN dotnet build "webApi.csproj" -c Release -o /app/build --force
 FROM build AS publish
-RUN dotnet publish "webApi.csproj" -c Release -o /app/publish
-FROM base AS final
+RUN dotnet publish "webApi.csproj" -c Release -o /app/publish --force
+FROM base AS final 
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "webApi.dll"]
