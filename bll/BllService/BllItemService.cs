@@ -112,10 +112,49 @@ namespace BLL.BllService
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to fetch ItemTags", ex);
+                throw new Exception("Failed to fetch items by category ", ex);
             }
         }
 
+        public async Task<IEnumerable<BllItem>> ReadTheRecommended()
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadTheRecommended();
 
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to find recommendations", ex);
+            }
+        }
+
+        public async Task<IEnumerable<BllItem>> ReadByTag(int tagId)
+
+        {
+
+            try
+
+            {
+                var dalItems = await _dalManager.items.ReadByTag(tagId);
+
+                var bllItems = dalItems.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItems;
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                throw new Exception("Failed to fetch items by tag", ex);
+
+            }
+
+        }
     }
 }

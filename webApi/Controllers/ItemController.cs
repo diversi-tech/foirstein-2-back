@@ -44,13 +44,40 @@ namespace WEBAPI.Controllers
         {
             try
             {
-                Console.WriteLine(default(DateTime));
                 var result = await _ibllItem.ReadByCategory(category);
                 return result;
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred while fetching items by category.", ex);
+            }
+        }
+
+        [HttpGet("ReadTheRecommended")]
+        public async Task<IEnumerable<BllItem>> ReadTheRecommended()
+        {
+            try
+            {
+                var result = await _ibllItem.ReadTheRecommended();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while find the recommended items.", ex);
+            }
+        }
+
+        [HttpGet("ReadByTag/{tagId}")]
+        public async Task<IEnumerable<BllItem>> ReadByTag(int tagId)
+        {
+            try
+            {
+                var result = await _ibllItem.ReadByTag(tagId);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetch items by tag", ex);
             }
         }
 
@@ -66,6 +93,7 @@ namespace WEBAPI.Controllers
                 throw;
             }
         }
+
     }
 }
 
