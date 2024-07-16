@@ -156,5 +156,21 @@ namespace BLL.BllService
             }
 
         }
+
+        public async Task<IEnumerable<BllItem>> ReadMostRequested()
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadMostRequested();
+
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch MostRequested", ex);
+            }
+        }
     }
 }
