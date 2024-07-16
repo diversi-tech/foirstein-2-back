@@ -23,6 +23,8 @@ public partial class Item
 
     public DateTime UpdatedAt { get; set; }
 
+    public bool Recommended { get; set; }
+
     public virtual ICollection<BorrowRequest> BorrowRequests { get; set; } = new List<BorrowRequest>();
 
     public virtual ICollection<ItemTag> ItemTags { get; set; } = new List<ItemTag>();

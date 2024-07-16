@@ -94,6 +94,14 @@ namespace DAL.DalService
 
         }
 
+        public async Task<IEnumerable<Item>> ReadTheRecommended()
+        {
+            return _context.Items.Where(item => item.Recommended == true).ToList();
+        }
+        public async Task<IEnumerable<Item>> ReadByTag(int tagId)
 
+        {
+            return _context.Items.Where(item => _context.ItemTags.Any(i => i.TagId == tagId && i.ItemId == item.Id)).ToList();
+        }
     }
 }
