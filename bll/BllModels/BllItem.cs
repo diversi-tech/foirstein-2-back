@@ -26,7 +26,7 @@ namespace BLL.BllModels
 
         public DateTime UpdatedAt { get; set; }
 
-        // public bool Recommended { get; set; }
+        public bool Recommended { get; set; }
 
     }
 }
