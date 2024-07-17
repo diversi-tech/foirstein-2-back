@@ -139,8 +139,6 @@ namespace WEBAPI.Controllers
                         return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred"); // HTTP 500 Internal Server Error for other exceptions
                     }
                 }
->>>>>>> 4abc55cb275c7e59e465447e421808cc77ff85e4
-            }
-        }
+            
     }
 }
