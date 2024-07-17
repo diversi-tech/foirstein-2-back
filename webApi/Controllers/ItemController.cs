@@ -53,19 +53,19 @@ namespace WEBAPI.Controllers
             }
         }
 
-        [HttpGet("ReadTheRecommended")]
-        public async Task<IEnumerable<BllItem>> ReadTheRecommended()
-        {
-            try
-            {
-                var result = await _ibllItem.ReadTheRecommended();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while find the recommended items.", ex);
-            }
-        }
+        //[HttpGet("ReadTheRecommended")]
+        //public async Task<IEnumerable<BllItem>> ReadTheRecommended()
+        //{
+        //    try
+        //    {
+        //        var result = await _ibllItem.ReadTheRecommended();
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("An error occurred while find the recommended items.", ex);
+        //    }
+        //}
 
         [HttpGet("ReadByTag/{tagId}")]
         public async Task<IEnumerable<BllItem>> ReadByTag(int tagId)
