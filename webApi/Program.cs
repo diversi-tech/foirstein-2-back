@@ -40,7 +40,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -64,5 +64,7 @@ app.UseEndpoints(endpoints =>
 /*app.UseCors("ReactCorsPolicy");
 */
 app.MapControllers();
+
+app.MapGet("/", () => "Welcome!!!");
 
 app.Run();
