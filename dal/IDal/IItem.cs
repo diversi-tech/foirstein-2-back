@@ -13,7 +13,7 @@ namespace DAL.IDal
         Task<IEnumerable<Item>> ReadByString(String searchKey);
         Task<IEnumerable<Item>> ReadByCategory(String category);
         Task<IEnumerable<Item>> ReadByAttributes(Item searchItem);
-        Task<IEnumerable<Item>> ReadTheRecommended();
+        //Task<IEnumerable<Item>> ReadTheRecommended();
         Task<IEnumerable<Item>> ReadByTag(int tagId);
 
     }

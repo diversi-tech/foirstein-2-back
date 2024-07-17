@@ -116,21 +116,21 @@ namespace BLL.BllService
             }
         }
 
-        public async Task<IEnumerable<BllItem>> ReadTheRecommended()
-        {
-            try
-            {
-                var dalItem = await _dalManager.items.ReadTheRecommended();
+        //public async Task<IEnumerable<BllItem>> ReadTheRecommended()
+        //{
+        //    try
+        //    {
+        //        var dalItem = await _dalManager.items.ReadTheRecommended();
 
-                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+        //        var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
 
-                return bllItem;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to find recommendations", ex);
-            }
-        }
+        //        return bllItem;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Failed to find recommendations", ex);
+        //    }
+        //}
 
         public async Task<IEnumerable<BllItem>> ReadByTag(int tagId)
 

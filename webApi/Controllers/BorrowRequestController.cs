@@ -88,7 +88,7 @@ namespace WEBAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
             }
         }
-       
+
         [HttpGet("getBorrowRequestsAndApprovals/{Id}")]
         public async Task<IActionResult> GetBorrowRequestsAndApprovals(int Id)
         {
@@ -100,6 +100,8 @@ namespace WEBAPI.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
+            }
+        }
         [HttpPost]
         [Route("AddBorrowRequest")]
         public async Task<ActionResult<bool>> AddBorrowRequest(BllBorrowRequest borrowRequest)
@@ -120,6 +122,7 @@ namespace WEBAPI.Controllers
                 }
 
             }
+
             catch (ItemTakenException ex)
             {
                 return BadRequest(ex.Message); // HTTP 400 Bad Request with custom exception message
