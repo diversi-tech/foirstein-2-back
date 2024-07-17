@@ -94,6 +94,20 @@ namespace WEBAPI.Controllers
             }
         }
 
+        [HttpGet("MostRequested")]
+        public async Task<IEnumerable<BllItem>> ReadMostRequested()
+        {
+            try
+            {
+                var result = await _ibllItem.ReadMostRequested();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetching most requested items.", ex);
+            }
+        }
+
     }
 }
 

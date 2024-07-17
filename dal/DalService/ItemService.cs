@@ -103,5 +103,39 @@ namespace DAL.DalService
         {
             return _context.Items.Where(item => _context.ItemTags.Any(i => i.TagId == tagId && i.ItemId == item.Id)).ToList();
         }
+
+        //public async Task<IEnumerable<Item>> ReadMostRequested()
+        //{
+        //    DateTime lastYearDate = new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day);
+
+        //    var top50Ids = _context.BorrowRequests
+        //        .Where(br => br.RequestDate >= lastYearDate)
+        //        .GroupBy(br => br.ItemId)
+        //        .OrderByDescending(group => group.Sum(br => 1))
+        //        .Take(50)
+        //        .Select(group => group.Key)
+        //        .ToList();
+
+        //    return _context.Items.Where(item => top50Ids.Contains(item.Id)).ToList();
+        //}
+
+        public async Task<IEnumerable<Item>> ReadMostRequested()
+        {
+            DateTime lastYearDate = new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day);
+
+            var top50Ids = _context.BorrowRequests
+                .Where(br => br.RequestDate >= lastYearDate)
+                .GroupBy(br => br.ItemId)
+                .OrderByDescending(group => group.Sum(br => 1))
+                .Take(50)
+                .Select(group => group.Key)
+                .ToList();
+
+            var items = _context.Items.Where(item => top50Ids.Contains(item.Id)).ToList();
+
+            var sortedItems = top50Ids.Select(id => items.FirstOrDefault(item => item.Id == id)).ToList();
+
+            return sortedItems;
+        }
     }
 }
