@@ -100,6 +100,7 @@ namespace WEBAPI.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
+<<<<<<< HEAD
             }
         }
         [HttpPost]
@@ -112,15 +113,18 @@ namespace WEBAPI.Controllers
                 bool result = await _blManager.BorrowRequests.Create(borrowRequest);
 
                 if (result)
+=======
+                [HttpPost]
+                [Route("AddBorrowRequest")]
+                 async Task<ActionResult<bool>> AddBorrowRequest(BllBorrowRequest borrowRequest)
+>>>>>>> 4abc55cb275c7e59e465447e421808cc77ff85e4
                 {
-                    return Ok(true); // HTTP 200 OK if successful
-                }
-                else
-                {
-                    return BadRequest("Adding failed"); // HTTP 400 Bad Request if failed
+                    try
+                    {
 
-                }
+                        bool result = await _blManager.BorrowRequests.Create(borrowRequest);
 
+<<<<<<< HEAD
             }
 
             catch (ItemTakenException ex)
@@ -138,6 +142,36 @@ namespace WEBAPI.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred"); // HTTP 500 Internal Server Error for other exceptions
+=======
+                        if (result)
+                        {
+                            return Ok(true); // HTTP 200 OK if successful
+                        }
+                        else
+                        {
+                            return BadRequest("Adding failed"); // HTTP 400 Bad Request if failed
+
+                        }
+
+                    }
+                    catch (ItemTakenException ex)
+                    {
+                        return BadRequest(ex.Message); // HTTP 400 Bad Request with custom exception message
+                    }
+                    catch (MaximumBorrowDurationExceededException ex)
+                    {
+                        return BadRequest(ex.Message); // HTTP 400 Bad Request with custom exception message
+                    }
+                    catch (InvalidLoanDatesException ex)
+                    {
+                        return BadRequest(ex.Message); // HTTP 400 Bad Request with custom exception message
+                    }
+                    catch (Exception ex)
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred"); // HTTP 500 Internal Server Error for other exceptions
+                    }
+                }
+>>>>>>> 4abc55cb275c7e59e465447e421808cc77ff85e4
             }
         }
     }
