@@ -122,6 +122,8 @@ public partial class LiberiansDbContext : DbContext
         {
             entity.HasKey(e => e.LogId);
 
+            //entity.Property(e => e.LogId).UseIdentityColumn();
+
             entity.ToTable("Search_Logs");
 
             entity.HasIndex(e => e.UserId, "IX_Search_Logs_UserId");
