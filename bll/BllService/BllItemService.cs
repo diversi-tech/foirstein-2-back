@@ -55,9 +55,20 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-        public Task<List<BllItem>> ReadAll()
+        public async Task<List<BllItem>> ReadAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dalItem = await _dalManager.items.ReadAll();
+
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to find all Items", ex);
+            }
         }
 
         public Task<BllItem> ReadbyId(int item)

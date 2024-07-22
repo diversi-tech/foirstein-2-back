@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IDal
 {
-    public interface IBorrowApprovalRequest:ICrud<BorrowApprovalRequest>
+    public interface IBorrowApprovalRequest:IblCrud<BorrowApprovalRequest>
     {
     }
 }

@@ -56,11 +56,6 @@ namespace DAL.DalService
             return _context.Items.Where(filter).ToList();
         }
 
-
-
-        public async Task<List<Item>> ReadAll() => _context.Items.ToList();
-
-
         public async Task<Item> ReadbyId(int idItem)
         {
             Item? item = _context.Items.ToList().Find(t => t.Id == idItem);
@@ -72,9 +67,9 @@ namespace DAL.DalService
             throw new NotImplementedException();
         }
 
-        Task<List<Item>> ICrud<Item>.ReadAll()
+        public async Task<List<Item>> ReadAll()
         {
-            throw new NotImplementedException();
+            return _context.Items.ToList();
         }
 
         public async Task<IEnumerable<Item>> ReadByCategory(string category)

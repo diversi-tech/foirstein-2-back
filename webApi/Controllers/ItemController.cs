@@ -6,12 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-﻿
-using BLL;
-using DAL;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
 namespace WEBAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -23,6 +17,19 @@ namespace WEBAPI.Controllers
         public ItemController(BlManager blManager)
         {
             _ibllItem = blManager.bllItem;
+        }
+
+        [HttpGet("ReadAll")]
+        public async Task<IEnumerable<BllItem>> ReadAll()
+        {
+            try
+            {
+                return await _ibllItem.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error in find all items", ex);
+            }
         }
 
         [HttpGet("ReadByString/{searchKey}")]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IDal
 {
-    public interface ITag:ICrud<Tag>
+    public interface ITag:IblCrud<Tag>
     {
     }
 }

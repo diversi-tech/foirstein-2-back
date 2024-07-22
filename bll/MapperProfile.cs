@@ -23,6 +23,7 @@ namespace BLL
             CreateMap<Tag, BllTag>().ReverseMap();
             CreateMap<Item, BllItem>().ReverseMap();
             CreateMap<RatingNote, BllRatingNote>().ReverseMap();
+            CreateMap<SearchLog, BllSearchLog>().ReverseMap();
 
 
         

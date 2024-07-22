@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IDal
 {
-    public interface ISearchLog:ICrud<SearchLog>
+    public interface ISearchLog : IblCrud<SearchLog>
     {
     }
 }
