@@ -1,5 +1,6 @@
 ﻿using dal.models;
 using DAL.IDal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,25 @@ namespace DAL.DalService
 {
     public class SearchLogService : ISearchLog
     {
-        public Task<bool> Create(SearchLog item)
+        private LiberiansDbContext _context;
+
+        public SearchLogService(LiberiansDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<bool> Create(SearchLog item)
+        {
+            try
+            {
+                _context.SearchLogs.Add(item);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error on create", ex);
+            }
         }
 
         public Task<bool> Delete(SearchLog item)
@@ -25,9 +42,9 @@ namespace DAL.DalService
             throw new NotImplementedException();
         }
 
-        public Task<List<SearchLog>> ReadAll()
+        public async Task<List<SearchLog>> ReadAll()
         {
-            throw new NotImplementedException();
+            return _context.SearchLogs.ToList();
         }
 
         public Task<SearchLog> ReadbyId(int item)

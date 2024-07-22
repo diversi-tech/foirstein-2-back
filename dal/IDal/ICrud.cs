@@ -1,6 +1,6 @@
 ﻿namespace DAL.DalApi;
 
-public interface ICrud<T>
+public interface IblCrud<T>
 {
     Task<bool> Create(T item);
     Task<bool> Delete(T item);

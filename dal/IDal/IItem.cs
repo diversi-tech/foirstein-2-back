@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IDal
 {
-    public interface IItem:ICrud<Item>
+    public interface IItem:IblCrud<Item>
     {
         Task<IEnumerable<Item>> ReadByString(String searchKey);
         Task<IEnumerable<Item>> ReadByCategory(String category);

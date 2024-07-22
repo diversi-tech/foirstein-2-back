@@ -3,11 +3,6 @@ using BLL.BllService;
 using BLL.BllServices;
 using BLL.IBll;
 using DAL;
-using BLL.IBll;
-using dal.models;
-using DAL;
-using DAL.DalService;
-using DAL.IDal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,6 +18,7 @@ namespace BLL
         public IbllTag bllTag { get; }
         public IbllItem bllItem { get; }
         public IbllRatingNote BlRatingNote { get; }
+        public IbllSearchLog bllSearchLog { get; }
 
         public BlManager()
         {
@@ -35,8 +31,7 @@ namespace BLL
             services.AddSingleton<IbllItemTag, BllItemTagService>();
             services.AddSingleton<IbllTag, BllTagService>();
             services.AddSingleton<IbllRatingNote, BllRatingNoteService>();
-
-      
+            services.AddSingleton<IbllSearchLog, BllSearchLogService>();
 
     
             var serviceProvider = services.BuildServiceProvider();
@@ -46,6 +41,7 @@ namespace BLL
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
             bllTag = serviceProvider.GetRequiredService<IbllTag>();
             BlRatingNote = serviceProvider.GetRequiredService<IbllRatingNote>();
+            bllSearchLog = serviceProvider.GetRequiredService<IbllSearchLog>();
 
         }
     }
