@@ -22,13 +22,18 @@ namespace DAL.DalService
         {
             try
             {
+                if (item == null)
+                {
+                    throw new ArgumentNullException(nameof(item));
+                }
+
                 _context.SearchLogs.Add(item);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
             {
-                throw new Exception("error on create", ex);
+                throw new Exception("Error on create", ex);
             }
         }
 

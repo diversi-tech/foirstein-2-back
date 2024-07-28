@@ -41,15 +41,13 @@ namespace DAL.DalService
 
         public async Task<IEnumerable<Item>> ReadByString(string searchKey)
         {
-
-            return
-            _context.Items.Where(item => EF.Functions.Like(item.Title, "%" + searchKey + "%") ||
-                                        EF.Functions.Like(item.Description, "%" + searchKey + "%") ||
-                                        EF.Functions.Like(item.Category, "%" + searchKey + "%") ||
-                                        EF.Functions.Like(item.Author, "%" + searchKey + "%")).ToList();
-
+            return _context.Items
+                .Where(item => item.Title.Contains(searchKey) ||
+                               item.Description.Contains(searchKey) ||
+                               item.Category.Contains(searchKey) ||
+                               item.Author.Contains(searchKey))
+                .ToList();
         }
-
 
         public async Task<List<Item>> Read(Func<Item, bool> filter)
         {
@@ -89,30 +87,12 @@ namespace DAL.DalService
 
         }
 
-        //public async Task<IEnumerable<Item>> ReadTheRecommended()
-        //{
-        //    return _context.Items.Where(item => item.Recommended == true).ToList();
-        //}
+
         public async Task<IEnumerable<Item>> ReadByTag(int tagId)
 
         {
             return _context.Items.Where(item => _context.ItemTags.Any(i => i.TagId == tagId && i.ItemId == item.Id)).ToList();
         }
-
-        //public async Task<IEnumerable<Item>> ReadMostRequested()
-        //{
-        //    DateTime lastYearDate = new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day);
-
-        //    var top50Ids = _context.BorrowRequests
-        //        .Where(br => br.RequestDate >= lastYearDate)
-        //        .GroupBy(br => br.ItemId)
-        //        .OrderByDescending(group => group.Sum(br => 1))
-        //        .Take(50)
-        //        .Select(group => group.Key)
-        //        .ToList();
-
-        //    return _context.Items.Where(item => top50Ids.Contains(item.Id)).ToList();
-        //}
 
         public async Task<IEnumerable<Item>> ReadMostRequested()
         {
@@ -132,5 +112,10 @@ namespace DAL.DalService
 
             return sortedItems;
         }
+
+        //public async Task<IEnumerable<Item>> ReadTheRecommended()
+        //{
+        //    return _context.Items.Where(item => item.Recommended == true).ToList();
+        //}
     }
 }
