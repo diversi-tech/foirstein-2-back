@@ -1,12 +1,8 @@
-﻿using BLL.BllModels;
-using BLL.BllService;
+﻿using BLL.BllService;
 using BLL.BllServices;
 using BLL.IBll;
 using DAL;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace BLL
@@ -33,11 +29,11 @@ namespace BLL
             services.AddSingleton<IbllRatingNote, BllRatingNoteService>();
             services.AddSingleton<IbllSearchLog, BllSearchLogService>();
 
-    
+
             var serviceProvider = services.BuildServiceProvider();
 
             BorrowRequests = serviceProvider.GetRequiredService<IbllBorrowRequest>();
-            bllItem = serviceProvider.GetRequiredService<IbllItem>();  
+            bllItem = serviceProvider.GetRequiredService<IbllItem>();
             bllItemTag = serviceProvider.GetRequiredService<IbllItemTag>();
             bllTag = serviceProvider.GetRequiredService<IbllTag>();
             BlRatingNote = serviceProvider.GetRequiredService<IbllRatingNote>();
