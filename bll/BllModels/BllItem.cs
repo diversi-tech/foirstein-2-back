@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.BllModels
+﻿namespace BLL.BllModels
 {
     public class BllItem
     {
@@ -26,7 +20,7 @@ namespace BLL.BllModels
 
         public DateTime UpdatedAt { get; set; }
 
-        //public bool Recommended { get; set; }
+        public bool Recommended { get; set; }
 
     }
 }

@@ -1,13 +1,7 @@
 ﻿
 using AutoMapper;
 using BLL.BllModels;
-using BLL.IBll;
 using dal.models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 
 
 namespace BLL
@@ -19,15 +13,15 @@ namespace BLL
 
             CreateMap<BorrowRequest, BllBorrowRequest>().ReverseMap();
             CreateMap<BorrowApprovalRequest, BllBorrowApprovalRequest>().ReverseMap();
-            CreateMap<ItemTag,BllItemTag>().ReverseMap();
+            CreateMap<ItemTag, BllItemTag>().ReverseMap();
             CreateMap<Tag, BllTag>().ReverseMap();
             CreateMap<Item, BllItem>().ReverseMap();
             CreateMap<RatingNote, BllRatingNote>().ReverseMap();
             CreateMap<SearchLog, BllSearchLog>().ReverseMap();
 
 
-        
-       }
+
+        }
 
 
     }

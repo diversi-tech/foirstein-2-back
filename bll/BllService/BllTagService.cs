@@ -1,16 +1,8 @@
 ﻿using AutoMapper;
-using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BLL.BllService
 {
@@ -20,7 +12,8 @@ namespace BLL.BllService
         private IMapper mapper;
         public BllTagService()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<MapperProfile>();
             });
             mapper = new Mapper(config);
@@ -101,6 +94,6 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
-      
+
     }
 }

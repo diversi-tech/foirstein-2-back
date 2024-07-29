@@ -1,12 +1,6 @@
 ﻿using dal.models;
-using DAL.DalApi;
 using DAL.IDal;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.DalService
 {
@@ -113,9 +107,9 @@ namespace DAL.DalService
             return sortedItems;
         }
 
-        //public async Task<IEnumerable<Item>> ReadTheRecommended()
-        //{
-        //    return _context.Items.Where(item => item.Recommended == true).ToList();
-        //}
+        public async Task<IEnumerable<Item>> ReadTheRecommended()
+        {
+            return _context.Items.Where(item => item.Recommended == true).ToList();
+        }
     }
 }

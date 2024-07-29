@@ -1,11 +1,4 @@
-﻿using dal.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.BllModels
+﻿namespace BLL.BllModels
 {
     public class BllBorrowRequest
     {
@@ -26,6 +19,6 @@ namespace BLL.BllModels
 
         public decimal? TotalPrice { get; set; }
 
-    
+
     }
 }

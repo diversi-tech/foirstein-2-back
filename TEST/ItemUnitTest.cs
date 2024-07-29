@@ -1,60 +1,12 @@
-﻿using DAL.DalService;
-using dal.models;
-using DAL;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL.BllService;
-using WEBAPI.Controllers;
-using AutoMapper;
-using BLL.BllModels;
-using BLL;
+﻿using dal.models;
+using DAL.DalService;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace TEST
 {
     public class ItemUnitTest
     {
-
-        [Fact]
-        public async Task TestReadByString()
-        {
-            // Arrange
-            var mockMapper = new Mock<IMapper>();
-            var mockDalManager = new Mock<DalManager>();
-            var mockBlManager = new Mock<BlManager>();
-            var mockBllItem = new Mock<BllItem>();
-
-            var items = new List<Item>
-            {
-                new Item { Title = "Sample Title", Description = "Sample Description", Category = "Sample Category", Author = "Sample Author" },
-            };
-
-            var mockContext = new Mock<LiberiansDbContext>();
-            var mockDbSet = new Mock<DbSet<Item>>();
-
-            mockDbSet.As<IQueryable<Item>>().Setup(m => m.Provider).Returns(items.AsQueryable().Provider);
-            mockDbSet.As<IQueryable<Item>>().Setup(m => m.Expression).Returns(items.AsQueryable().Expression);
-            mockDbSet.As<IQueryable<Item>>().Setup(m => m.ElementType).Returns(items.AsQueryable().ElementType);
-            mockDbSet.As<IQueryable<Item>>().Setup(m => m.GetEnumerator()).Returns(items.AsQueryable().GetEnumerator());
-
-            mockContext.Setup(c => c.Items).Returns(mockDbSet.Object);
-
-            var dalService = new ItemService(mockContext.Object);
-            var bllService = new BllItemService(mockMapper.Object, mockDalManager.Object);
-            var controller = new ItemController(mockBlManager.Object);
-
-            // Act
-            var result = await controller.ReadByString("א");
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(items.Count, result.Count());
-            // Add more assertions based on your specific requirements
-        }
 
         [Fact]
         public async Task ReadByString_ReturnsItemsMatchingSearchKey()
