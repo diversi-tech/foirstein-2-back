@@ -13,6 +13,8 @@
 
         public int? Rating { get; set; }
 
+        public bool? SavedItem { get; set; }
+
         public BllRatingNote(int RatingNoteId, int UserId, int? ItemId, string? Note, int? Rating)
         {
             this.RatingNoteId = RatingNoteId;
