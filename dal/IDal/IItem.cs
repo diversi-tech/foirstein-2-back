@@ -11,6 +11,6 @@ namespace DAL.IDal
         Task<IEnumerable<Item>> ReadTheRecommended();
         Task<IEnumerable<Item>> ReadByTag(int tagId);
         Task<IEnumerable<Item>> ReadMostRequested();
-
+        Task<IEnumerable<Item>> ReadSavedItems(int userId);
     }
 }

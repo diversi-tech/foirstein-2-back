@@ -11,7 +11,7 @@ namespace BLL.IBll
         Task<IEnumerable<BllItem>> ReadTheRecommended();
         Task<IEnumerable<BllItem>> ReadByTag(int tagId);
         Task<IEnumerable<BllItem>> ReadMostRequested();
-
+        Task<IEnumerable<BllItem>> ReadSavedItems(int userId);
 
 
     }
