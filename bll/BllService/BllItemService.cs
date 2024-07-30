@@ -177,5 +177,21 @@ namespace BLL.BllService
                 throw new Exception("Failed to fetch MostRequested", ex);
             }
         }
+
+        public async Task<IEnumerable<BllItem>> ReadSavedItems(int userId)
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadSavedItems(userId);
+
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch ReadSavedItems", ex);
+            }
+        }
     }
 }

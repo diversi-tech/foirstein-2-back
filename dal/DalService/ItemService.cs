@@ -111,5 +111,14 @@ namespace DAL.DalService
         {
             return _context.Items.Where(item => item.Recommended == true).ToList();
         }
+
+        public async Task<IEnumerable<Item>> ReadSavedItems(int userId)
+        {
+            var items = _context.Items
+                .Where(item => _context.RatingNotes.Any(rn => rn.ItemId == item.Id && rn.SavedItem && rn.UserId == userId))
+                .ToList();
+
+            return items;
+        }
     }
 }
