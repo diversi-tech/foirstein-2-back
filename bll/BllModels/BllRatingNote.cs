@@ -1,12 +1,4 @@
-﻿using dal.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace BLL.BllModels
+﻿namespace BLL.BllModels
 {
 
     public class BllRatingNote
@@ -20,6 +12,8 @@ namespace BLL.BllModels
         public string? Note { get; set; }
 
         public int? Rating { get; set; }
+
+        public bool? SavedItem { get; set; }
 
         public BllRatingNote(int RatingNoteId, int UserId, int? ItemId, string? Note, int? Rating)
         {

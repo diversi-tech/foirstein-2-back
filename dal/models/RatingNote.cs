@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace dal.models;
+﻿namespace dal.models;
 
 public partial class RatingNote
 {
@@ -14,6 +11,8 @@ public partial class RatingNote
     public string? Note { get; set; }
 
     public int? Rating { get; set; }
+
+    public bool SavedItem { get; set; } = false;
 
     public virtual Item? Item { get; set; }
 

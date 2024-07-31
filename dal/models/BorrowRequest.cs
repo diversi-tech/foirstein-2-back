@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace dal.models;
+﻿namespace dal.models;
 
 public partial class BorrowRequest
 {

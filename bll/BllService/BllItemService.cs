@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 using dal.models;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.BllService
 {
@@ -127,21 +121,21 @@ namespace BLL.BllService
             }
         }
 
-        //public async Task<IEnumerable<BllItem>> ReadTheRecommended()
-        //{
-        //    try
-        //    {
-        //        var dalItem = await _dalManager.items.ReadTheRecommended();
+        public async Task<IEnumerable<BllItem>> ReadTheRecommended()
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadTheRecommended();
 
-        //        var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
 
-        //        return bllItem;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Failed to find recommendations", ex);
-        //    }
-        //}
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to find recommendations", ex);
+            }
+        }
 
         public async Task<IEnumerable<BllItem>> ReadByTag(int tagId)
 
@@ -181,6 +175,22 @@ namespace BLL.BllService
             catch (Exception ex)
             {
                 throw new Exception("Failed to fetch MostRequested", ex);
+            }
+        }
+
+        public async Task<IEnumerable<BllItem>> ReadSavedItems(int userId)
+        {
+            try
+            {
+                var dalItem = await _dalManager.items.ReadSavedItems(userId);
+
+                var bllItem = dalItem.Select(item => _mapper.Map<BllItem>(item)).ToList();
+
+                return bllItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch ReadSavedItems", ex);
             }
         }
     }

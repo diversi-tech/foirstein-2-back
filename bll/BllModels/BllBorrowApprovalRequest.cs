@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using dal.models;
+﻿namespace BLL.BllModels;
 
-namespace BLL.BllModels;
-
-public  class BllBorrowApprovalRequest
+public class BllBorrowApprovalRequest
 {
     public int RequestId { get; set; }
 

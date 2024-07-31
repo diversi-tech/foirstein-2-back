@@ -1,11 +1,5 @@
 ﻿using dal.models;
 using DAL.IDal;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.DalService
 {
@@ -36,7 +30,7 @@ namespace DAL.DalService
         //public Task<List<Tag>> ReadAll() => _context.Tags.ToList();
         public Task<List<Tag>> ReadAll()
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
 
