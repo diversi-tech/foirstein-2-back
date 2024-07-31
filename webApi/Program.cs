@@ -1,4 +1,8 @@
 using BLL;
+using Microsoft.OpenApi.Models;
+using AutoMapper;
+using BLL.BllModels;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

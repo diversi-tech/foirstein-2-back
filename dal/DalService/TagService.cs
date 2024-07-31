@@ -1,4 +1,11 @@
-﻿using dal.models;
+﻿using DAL.IDal;
+using DAL.models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DAL.IDal;
 
 namespace DAL.DalService

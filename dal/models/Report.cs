@@ -1,4 +1,8 @@
-﻿namespace dal.models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace DAL.models;
+
 
 public partial class Report
 {

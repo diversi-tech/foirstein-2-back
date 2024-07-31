@@ -1,5 +1,6 @@
-﻿using dal.models;
+﻿using DAL.DalApi;
 using DAL.IDal;
+using DAL.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.DalService
