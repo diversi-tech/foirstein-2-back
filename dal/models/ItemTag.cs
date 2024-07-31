@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.models;
 
+
 public partial class ItemTag
 {
     public int Id { get; set; }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace DAL.models;
-
 public partial class RatingNote
 {
     public int RatingNoteId { get; set; }
@@ -16,6 +15,8 @@ public partial class RatingNote
     public int? Rating { get; set; }
 
     public bool SavedItem { get; set; }
+
+
 
     public virtual Item? Item { get; set; }
 

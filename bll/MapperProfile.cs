@@ -19,15 +19,15 @@ namespace BLL
 
             CreateMap<BorrowRequest, BllBorrowRequest>().ReverseMap();
             CreateMap<BorrowApprovalRequest, BllBorrowApprovalRequest>().ReverseMap();
-            CreateMap<ItemTag,BllItemTag>().ReverseMap();
+            CreateMap<ItemTag, BllItemTag>().ReverseMap();
             CreateMap<Tag, BllTag>().ReverseMap();
             CreateMap<Item, BllItem>().ReverseMap();
             CreateMap<RatingNote, BllRatingNote>().ReverseMap();
             CreateMap<SearchLog, BllSearchLog>().ReverseMap();
 
 
-        
-       }
+
+        }
 
 
     }

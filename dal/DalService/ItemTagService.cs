@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.IDal;
 
 namespace DAL.DalService
 {
@@ -39,7 +40,7 @@ namespace DAL.DalService
         }
         public async Task<List<ItemTag>> ReadAll(int itemId)
         {
-            return _context.ItemTags.Where(itemTag =>  itemTag.ItemId == itemId).ToList();
+            return _context.ItemTags.Where(itemTag => itemTag.ItemId == itemId).ToList();
         }
 
         public Task<ItemTag> ReadbyId(int item)

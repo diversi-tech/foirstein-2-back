@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using DAL.IDal;
 using DAL.models;
 
+using DAL.IDal;
+using Microsoft.EntityFrameworkCore;
+
 namespace DAL.DalService
 {
     public class RatingNoteService : IRatingNote

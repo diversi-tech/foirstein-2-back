@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DAL.DalApi;
+
 namespace DAL.IDal
 {
-    public interface ITag:IblCrud<Tag>
+    public interface ITag : IblCrud<Tag>
     {
     }
 }

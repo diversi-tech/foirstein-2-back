@@ -8,9 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Reflection.Metadata.BlobBuilder;
 
+
 namespace BLL.IBll
 {
-    public interface IbllRatingNote:IblCrud<BllRatingNote>
+    public interface IbllRatingNote : IblCrud<BllRatingNote>
     {
         Task<BllRatingNote> getRatingNote(int userId, int itemId);
     }

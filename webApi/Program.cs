@@ -22,14 +22,22 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 // Configure CORS
-/*builder.Services.AddCors(options =>
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("ReactCorsPolicy",
+//        builder => builder.WithOrigins("*")
+//                          .AllowAnyHeader()
+//                          .AllowAnyMethod());
+//});
+
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactCorsPolicy",
-        builder => builder.WithOrigins("*")
+        builder => builder.WithOrigins("https://search.foirstein.diversitech.co.il")
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
-*/
+
 
 
 
@@ -60,8 +68,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 // Use CORS policy
-/*app.UseCors("ReactCorsPolicy");
-*/
+app.UseCors("ReactCorsPolicy");
+
 app.MapControllers();
 
 app.MapGet("/", () => "Welcome!!!");

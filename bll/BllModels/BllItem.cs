@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.BllModels
+﻿namespace BLL.BllModels
 {
     public class BllItem
     {
@@ -28,6 +22,8 @@ namespace BLL.BllModels
 
         public int PublishingYear { get; set; }
 
+        public bool Recommended { get; set; }
+
         public string? Edition { get; set; }
 
         public string? Series { get; set; }
@@ -46,7 +42,6 @@ namespace BLL.BllModels
 
         public int? NumberOfDaysOfQuestion { get; set; }
 
-        public bool Recommended { get; set; }
 
         public int? UserId { get; set; }
 

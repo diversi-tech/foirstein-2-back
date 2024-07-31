@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DAL.DalApi;
+
 namespace DAL.IDal
 {
-    public interface IRatingNote:IblCrud<RatingNote>
+    public interface IRatingNote : IblCrud<RatingNote>
     {
         Task<RatingNote> GetByUserAndItem(int userId, int itemId);
     }

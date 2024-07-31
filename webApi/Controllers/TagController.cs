@@ -1,7 +1,6 @@
-﻿using BLL.BllModels;
+﻿using BLL;
+using BLL.BllModels;
 using BLL.IBll;
-using BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEBAPI.Controllers

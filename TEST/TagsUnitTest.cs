@@ -2,12 +2,7 @@
 using BLL.BllModels;
 using BLL.IBll;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WEBAPI.Controllers;
 
 namespace TEST
@@ -105,7 +100,7 @@ namespace TEST
             {
                 new BllTag { Id = 6, Name = "Tag1" },
                 new BllTag { Id = 7, Name = "Tag2" },
-                new BllTag { Id = 6, Name = "Tag1" } 
+                new BllTag { Id = 6, Name = "Tag1" }
             };
             mockIbllTag.Setup(m => m.ReadAll(itemId)).ReturnsAsync(duplicateTags);
             var result = await tagController.GetAllTagsById(itemId);

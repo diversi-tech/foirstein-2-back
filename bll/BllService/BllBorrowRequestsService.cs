@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.Internal;
-using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
 
@@ -8,6 +6,7 @@ using DAL;
 using DAL.IDal;
 using DAL.models;
 using System.Linq;
+
 
 using static BLL.Exeptions.BorrowRequestExeptions;
 
@@ -124,17 +123,15 @@ namespace BLL.BllService
                 {
                       itemIds.Add((int)borrowApprovalRequest.ItemId);
                  
+
                 }
 
                 foreach (var borrowRequest in borrowRequests)
                 {
-                     itemIds.Add(borrowRequest.ItemId.Value);
-               
+                    itemIds.Add(borrowRequest.ItemId.Value);
+
                 }
 
-                // קריאת רשימת הפריטים לפי itemIds
-/*                List<Item> items = await _dalManager.Items.Read(i => itemIds.Contains(i.Id));
-*/
                 List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllItem>>(items);
             }
