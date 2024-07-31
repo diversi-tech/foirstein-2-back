@@ -1,5 +1,5 @@
-﻿using dal.models;
-using DAL.DalApi;
+﻿using DAL.DalApi;
+using DAL.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

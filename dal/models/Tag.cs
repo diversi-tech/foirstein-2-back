@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dal.models;
+namespace DAL.models;
 
 public partial class Tag
 {
@@ -10,4 +10,6 @@ public partial class Tag
     public string Name { get; set; } = null!;
 
     public virtual ICollection<ItemTag> ItemTags { get; set; } = new List<ItemTag>();
+
+    public virtual ICollection<PhysicalItemTag> PhysicalItemTags { get; set; } = new List<PhysicalItemTag>();
 }

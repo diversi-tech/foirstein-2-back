@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dal.models;
+namespace DAL.models;
 
 public partial class ActivityLog
 {
@@ -15,5 +15,7 @@ public partial class ActivityLog
 
     public int? UserId1 { get; set; }
 
-    public virtual User? UserId1Navigation { get; set; }
+    public int UserId1NavigationUserId { get; set; }
+
+    public virtual User UserId1NavigationUser { get; set; } = null!;
 }

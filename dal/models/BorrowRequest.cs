@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dal.models;
+namespace DAL.models;
 
 public partial class BorrowRequest
 {
@@ -10,7 +10,6 @@ public partial class BorrowRequest
     public int? ItemId { get; set; }
 
     public int UserId { get; set; }
-
 
     public DateTime? RequestDate { get; set; }
 
@@ -21,6 +20,8 @@ public partial class BorrowRequest
     public DateTime? UntilDate { get; set; }
 
     public decimal? TotalPrice { get; set; }
+
+    public bool? IsWaiting { get; set; }
 
     public virtual Item? Item { get; set; }
 

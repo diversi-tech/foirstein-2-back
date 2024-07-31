@@ -1,4 +1,4 @@
-﻿using dal.models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,6 @@ namespace BLL.BllModels
 
         public int UserId { get; set; }
 
-
         public DateTime? RequestDate { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
@@ -26,6 +25,9 @@ namespace BLL.BllModels
 
         public decimal? TotalPrice { get; set; }
 
-    
+        public bool? IsWaiting { get; set; }
+
+
+
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
-using dal.models;
 using DAL.IDal;
+using DAL.models;
 
 namespace DAL.DalService
 {

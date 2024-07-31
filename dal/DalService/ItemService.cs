@@ -1,6 +1,6 @@
-﻿using dal.models;
-using DAL.DalApi;
+﻿using DAL.DalApi;
 using DAL.IDal;
+using DAL.models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

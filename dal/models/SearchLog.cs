@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dal.models;
+namespace DAL.models;
 
 public partial class SearchLog
 {
