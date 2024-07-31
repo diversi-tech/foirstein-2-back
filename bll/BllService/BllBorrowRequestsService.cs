@@ -43,17 +43,17 @@ namespace BLL.BllService
                 int itemId = item.ItemId ?? 0;
                 var dalRequest = mapper.Map<BorrowRequest>(item);
 
-                //List<BorrowRequest> allBorrowRequests = await _dalManager.BorrowRequests.ReadAll();
+                List<BorrowRequest> allBorrowRequests = await _dalManager.BorrowRequests.ReadAll();
 
-                //List<BorrowRequest> itemBorrowRequests = allBorrowRequests.Where(br => br.ItemId == item.ItemId).ToList();
+                List<BorrowRequest> itemBorrowRequests = allBorrowRequests.Where(br => br.ItemId == item.ItemId).ToList();
 
-                //foreach (var existingRequest in itemBorrowRequests)
-                //{
-                //    if (item.FromDate < existingRequest.UntilDate && item.UntilDate > existingRequest.FromDate)
-                //    {
-                //        throw new ItemTakenException();
-                //    }
-                //}
+                foreach (var existingRequest in itemBorrowRequests)
+                {
+                    if (item.FromDate < existingRequest.UntilDate && item.UntilDate > existingRequest.FromDate)
+                    {
+                        throw new ItemTakenException();
+                    }
+                }
 
                 if (dalRequest != null)
                 {
@@ -226,6 +226,30 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
+        public async Task<dynamic> GetBorrowRequestsAndApprovalsByItemId(int itemId)
+        {
+            try
+            {
+                var borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.ItemId == itemId);
+                var borrowRequests = await _dalManager.BorrowRequests.Read(br => br.ItemId == itemId);
 
+                var mappedBorrowApprovalRequests = mapper.Map<List<BorrowApprovalRequest>, List<BllBorrowApprovalRequest>>(borrowApprovalRequests);
+                var mappedBorrowRequests = mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+
+                var result = new
+                {
+                    BorrowApprovalRequests = mappedBorrowApprovalRequests,
+                    BorrowRequests = mappedBorrowRequests
+                };
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            throw new NotImplementedException();
+        }
     }
 }
