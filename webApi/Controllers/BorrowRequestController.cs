@@ -148,5 +148,19 @@ namespace WEBAPI.Controllers
             }
         }
 
+        [HttpGet("getItemById/{Id}")]
+        public async Task<IActionResult> getItemById(int Id)
+        {
+            try
+            {
+                var result = await _blManager.BorrowRequests.getItemById(Id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
+            }
+        }
+
     }
 }

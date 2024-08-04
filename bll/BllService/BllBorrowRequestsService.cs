@@ -253,5 +253,11 @@ namespace BLL.BllService
             }
             throw new NotImplementedException();
         }
+
+        public async Task<BllItem> getItemById(int item)
+        {
+            Item items = await _dalManager.items.ReadbyId(item);
+            return mapper.Map<Item, BllItem>(items);
+        }
     }
 }

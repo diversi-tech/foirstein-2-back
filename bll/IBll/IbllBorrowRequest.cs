@@ -8,6 +8,7 @@ namespace BLL.IBll
 
         Task<List<BllBorrowRequest>> Read(int filter);
         Task<List<BllItem>> getAllItemToUser(int filter);
+        Task<BllItem> getItemById(int item);
         Task<bool> deletRequest(int id);
         Task<dynamic> GetBorrowRequestsAndApprovals(int id);
         Task<dynamic> GetBorrowRequestsAndApprovalsByItemId(int id);
