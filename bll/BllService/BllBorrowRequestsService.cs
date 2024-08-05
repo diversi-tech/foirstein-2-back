@@ -110,12 +110,6 @@ namespace BLL.BllService
                 List<BorrowApprovalRequest> borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.UserId == userId);
                 List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
 
-                /*   var itemIds = borrowRequests.Select(br => br.ItemId)
-                                               .Concat(borrowApprovalRequests.Select(br => br.ItemId))
-                                               .Distinct() .ToList();*/
-                /*   var itemIds = borrowApprovalRequests.Select(bar => bar.ItemId).ToList();
-                    itemIds.AddRange((IEnumerable<int>)borrowRequests.Select(br => br.ItemId));
-    */
 
                 List<int> itemIds = new List<int>();
 
