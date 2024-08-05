@@ -109,7 +109,10 @@ namespace DAL.DalService
 
         public async Task<IEnumerable<Item>> ReadTheRecommended()
         {
-            return _context.Items.Where(item => item.Recommended == true).ToList();
+            return await _context.Items
+                                 .Where(item => item.Recommended == true && item.Author != null)
+                                 .ToListAsync();
         }
+
     }
 }
