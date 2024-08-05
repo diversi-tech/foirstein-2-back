@@ -256,8 +256,15 @@ namespace BLL.BllService
 
         public async Task<BllItem> getItemById(int item)
         {
+        try{
             Item items = await _dalManager.items.ReadbyId(item);
+            if(items.Author != null)
             return mapper.Map<Item, BllItem>(items);
+            }
+   catch (Exception ex)
+   {
+       throw ex;
+   }
         }
     }
 }
