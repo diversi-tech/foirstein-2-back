@@ -1,7 +1,10 @@
 ﻿using BLL;
 using BLL.BllModels;
 using BLL.IBll;
+using DAL.IDal;
+using DAL.models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace WEBAPI.Controllers
 {
@@ -123,6 +126,20 @@ namespace WEBAPI.Controllers
             catch (Exception ex)
             {
                 throw new Exception("An error occurred while fetching saved items.", ex);
+            }
+        }
+
+        [HttpPost("itemSuggestions")]
+        public async Task<IEnumerable<BllItem>> ReadItemSuggestions([FromBody] BllItem item)
+        {
+            try
+            {
+                var result = await _ibllItem.ItemSuggestions(item);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error finding suggestions for items", ex);
             }
         }
 
