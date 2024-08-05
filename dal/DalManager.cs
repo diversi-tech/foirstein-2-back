@@ -1,6 +1,6 @@
-﻿using dal.models;
-using DAL.DalService;
+﻿using DAL.DalService;
 using DAL.IDal;
+using DAL.models;
 using Microsoft.Extensions.DependencyInjection;
 namespace DAL;
 

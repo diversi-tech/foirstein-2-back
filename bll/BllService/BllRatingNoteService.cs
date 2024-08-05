@@ -2,8 +2,9 @@
 using BL.BLApi;
 using BLL.BllModels;
 using BLL.IBll;
-using dal.models;
+
 using DAL;
+using DAL.models;
 
 namespace BLL.BllServices
 {
@@ -67,8 +68,9 @@ namespace BLL.BllServices
 
                 if (matchingRatingNote != null)
                 {
-                    matchingRatingNote.Rating = ratingNote.Rating;
-                    matchingRatingNote.Note = ratingNote.Note;
+                    matchingRatingNote.Rating = ratingNote.Rating ?? matchingRatingNote.Rating;
+                    matchingRatingNote.Note = ratingNote.Note ?? matchingRatingNote.Note;
+                    matchingRatingNote.SavedItem = ratingNote.SavedItem ?? matchingRatingNote.SavedItem;
                     bool b = await _dalManager.ratingNote.Update(matchingRatingNote);
                 }
                 else

@@ -1,6 +1,11 @@
-﻿using dal.models;
+﻿using DAL.DalApi;
+using DAL.models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DAL.DalApi;
-
 namespace DAL.IDal
 {
     public interface IItem : IblCrud<Item>
@@ -11,6 +16,6 @@ namespace DAL.IDal
         Task<IEnumerable<Item>> ReadTheRecommended();
         Task<IEnumerable<Item>> ReadByTag(int tagId);
         Task<IEnumerable<Item>> ReadMostRequested();
-
+        Task<IEnumerable<Item>> ReadSavedItems(int userId);
     }
 }

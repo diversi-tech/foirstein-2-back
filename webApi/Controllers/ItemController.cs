@@ -112,6 +112,20 @@ namespace WEBAPI.Controllers
             }
         }
 
+        [HttpGet("ReadSavedItems/{userId}")]
+        public async Task<IEnumerable<BllItem>> ReadSavedItems(int userId)
+        {
+            try
+            {
+                var result = await _ibllItem.ReadSavedItems(userId);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetching saved items.", ex);
+            }
+        }
+
     }
 }
 

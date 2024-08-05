@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace dal.models;
+namespace DAL.models;
 
 public partial class LiberiansDbContext : DbContext
 {
@@ -15,13 +15,25 @@ public partial class LiberiansDbContext : DbContext
 
     public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
+    public virtual DbSet<AddNewRequest> AddNewRequests { get; set; }
+
     public virtual DbSet<BorrowApprovalRequest> BorrowApprovalRequests { get; set; }
 
     public virtual DbSet<BorrowRequest> BorrowRequests { get; set; }
 
+    public virtual DbSet<Borrowing> Borrowings { get; set; }
+
+    public virtual DbSet<Conversation> Conversations { get; set; }
+
     public virtual DbSet<Item> Items { get; set; }
 
     public virtual DbSet<ItemTag> ItemTags { get; set; }
+
+    public virtual DbSet<LibrarianPermission> LibrarianPermissions { get; set; }
+
+    public virtual DbSet<PhysicalItem> PhysicalItems { get; set; }
+
+    public virtual DbSet<PhysicalItemTag> PhysicalItemTags { get; set; }
 
     public virtual DbSet<RatingNote> RatingNotes { get; set; }
 
@@ -33,14 +45,9 @@ public partial class LiberiansDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    ////#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Server=localhost,1433;Database=liberiansDB;User Id=sa;Password=Foir100#;TrustServerCertificate=True");
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql("Host=dpg-cq9oc8jv2p9s73cllde0-a.oregon-postgres.render.com;Database=librarydb_32cv;Username=foyershtein;Password=LISwmgiBi9NneNbBovnrfrZnEed2M38m;");
-        Console.WriteLine("conect to postres DB!!!!");
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=dpg-cq9oc8jv2p9s73cllde0-a.oregon-postgres.render.com;Database=librarydb_32cv;Username=foyershtein;Password=LISwmgiBi9NneNbBovnrfrZnEed2M38m;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -50,9 +57,16 @@ public partial class LiberiansDbContext : DbContext
 
             entity.ToTable("Activity_Logs");
 
-            entity.HasIndex(e => e.UserId1, "IX_Activity_Logs_UserId1");
+            entity.HasIndex(e => e.UserId1NavigationUserId, "IX_Activity_Logs_UserId1NavigationUserId");
 
-            entity.HasOne(d => d.UserId1Navigation).WithMany(p => p.ActivityLogs).HasForeignKey(d => d.UserId1);
+            entity.HasOne(d => d.UserId1NavigationUser).WithMany(p => p.ActivityLogs).HasForeignKey(d => d.UserId1NavigationUserId);
+        });
+
+        modelBuilder.Entity<AddNewRequest>(entity =>
+        {
+            entity.Property(e => e.CreatedAt).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.Note).HasMaxLength(225);
+            entity.Property(e => e.UpdatedAt).HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<BorrowApprovalRequest>(entity =>
@@ -62,6 +76,9 @@ public partial class LiberiansDbContext : DbContext
             entity.ToTable("Borrow_Approval_Requests");
 
             entity.HasIndex(e => e.UserId, "IX_Borrow_Approval_Requests_UserId");
+
+            entity.Property(e => e.FromDate).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.UntilDate).HasColumnType("timestamp without time zone");
 
             entity.HasOne(d => d.User).WithMany(p => p.BorrowApprovalRequests).HasForeignKey(d => d.UserId);
         });
@@ -76,24 +93,111 @@ public partial class LiberiansDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "IX_Borrow_Requests_UserId");
 
-            entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
-
             entity.HasOne(d => d.Item).WithMany(p => p.BorrowRequests).HasForeignKey(d => d.ItemId);
 
             entity.HasOne(d => d.User).WithMany(p => p.BorrowRequests).HasForeignKey(d => d.UserId);
+        });
+
+        modelBuilder.Entity<Borrowing>(entity =>
+        {
+            entity.HasIndex(e => e.BookId, "IX_Borrowings_BookId");
+
+            entity.HasIndex(e => e.LibrarianId, "IX_Borrowings_LibrarianId");
+
+            entity.HasIndex(e => e.StudentId, "IX_Borrowings_StudentID");
+
+            entity.Property(e => e.Date).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.StudentId).HasColumnName("StudentID");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.Borrowings).HasForeignKey(d => d.BookId);
+
+            entity.HasOne(d => d.Librarian).WithMany(p => p.BorrowingLibrarians).HasForeignKey(d => d.LibrarianId);
+
+            entity.HasOne(d => d.Student).WithMany(p => p.BorrowingStudents).HasForeignKey(d => d.StudentId);
+        });
+
+        modelBuilder.Entity<Conversation>(entity =>
+        {
+            entity.HasKey(e => e.ConversationId).HasName("pk_convesetion");
+
+            entity.ToTable("Conversation");
+
+            entity.HasIndex(e => e.UserId2, "fki_UserId2");
+
+            entity.Property(e => e.Time).HasColumnType("timestamp without time zone");
+
+            entity.HasOne(d => d.UserId1Navigation).WithMany(p => p.ConversationUserId1Navigations)
+                .HasForeignKey(d => d.UserId1)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_user1");
+
+            entity.HasOne(d => d.UserId2Navigation).WithMany(p => p.ConversationUserId2Navigations)
+                .HasForeignKey(d => d.UserId2)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_userid2");
+        });
+
+        modelBuilder.Entity<Item>(entity =>
+        {
+            entity.Property(e => e.Amount).HasDefaultValue(0);
+            entity.Property(e => e.CreatedAt).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.ItemType).HasDefaultValue(0);
+            entity.Property(e => e.Note).HasMaxLength(225);
+            entity.Property(e => e.UpdatedAt).HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<ItemTag>(entity =>
         {
             entity.ToTable("ItemTag");
 
-            entity.HasIndex(e => e.ItemId, "IX_ItemTag_ItemId");
-
-            entity.HasIndex(e => e.TagId, "IX_ItemTag_TagId");
-
             entity.HasOne(d => d.Item).WithMany(p => p.ItemTags).HasForeignKey(d => d.ItemId);
 
             entity.HasOne(d => d.Tag).WithMany(p => p.ItemTags).HasForeignKey(d => d.TagId);
+        });
+
+        modelBuilder.Entity<LibrarianPermission>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("librarian_permissions_pkey");
+
+            entity.ToTable("librarian_permissions");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Permissions).HasColumnName("permissions");
+
+            entity.HasOne(d => d.User).WithMany(p => p.LibrarianPermissions)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserId");
+        });
+
+        modelBuilder.Entity<PhysicalItem>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("physicalitem_pkey");
+
+            entity.ToTable("PhysicalItem");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('physicalitem_id_seq'::regclass)");
+            entity.Property(e => e.Category).HasMaxLength(255);
+            entity.Property(e => e.Title).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<PhysicalItemTag>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("physicalitemtag_pkey");
+
+            entity.ToTable("PhysicalItemTag");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('physicalitemtag_id_seq'::regclass)");
+
+            entity.HasOne(d => d.PhysicalItem).WithMany(p => p.PhysicalItemTags)
+                .HasForeignKey(d => d.PhysicalItemId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("physicalitemtag_physicalitemid_fkey");
+
+            entity.HasOne(d => d.Tag).WithMany(p => p.PhysicalItemTags)
+                .HasForeignKey(d => d.TagId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("physicalitemtag_tagid_fkey");
         });
 
         modelBuilder.Entity<RatingNote>(entity =>
@@ -103,6 +207,8 @@ public partial class LiberiansDbContext : DbContext
             entity.HasIndex(e => e.ItemId, "IX_Rating_Notes_ItemId");
 
             entity.HasIndex(e => e.UserId, "IX_Rating_Notes_UserId");
+
+            entity.Property(e => e.SavedItem).HasDefaultValue(false);
 
             entity.HasOne(d => d.Item).WithMany(p => p.RatingNotes).HasForeignKey(d => d.ItemId);
 
@@ -129,10 +235,12 @@ public partial class LiberiansDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.Property(e => e.Activity).HasDefaultValue(true);
             entity.Property(e => e.Tz)
                 .HasMaxLength(9)
                 .HasColumnName("tz");
         });
+        modelBuilder.HasSequence("librarian_permissions_id_seq");
 
         OnModelCreatingPartial(modelBuilder);
     }

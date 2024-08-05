@@ -1,5 +1,6 @@
-﻿using dal.models;
+﻿using DAL.DalApi;
 using DAL.IDal;
+using DAL.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.DalService
@@ -17,6 +18,7 @@ namespace DAL.DalService
         {
             throw new NotImplementedException();
         }
+      
 
         public async Task<bool> Delete(Item item)
         {
@@ -114,5 +116,14 @@ namespace DAL.DalService
                                  .ToListAsync();
         }
 
+
+        public async Task<IEnumerable<Item>> ReadSavedItems(int userId)
+        {
+            var items = _context.Items
+                .Where(item => _context.RatingNotes.Any(rn => rn.ItemId == item.Id && rn.SavedItem && rn.UserId == userId))
+                .ToList();
+
+            return items;
+        }
     }
 }

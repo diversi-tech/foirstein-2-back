@@ -3,16 +3,13 @@ using System.Collections.Generic;
 
 namespace DAL.models;
 
-
-public partial class SearchLog
+public partial class LibrarianPermission
 {
-    public int LogId { get; set; }
-
     public int UserId { get; set; }
 
-    public string SearchQuery { get; set; } = null!;
+    public List<string> Permissions { get; set; } = null!;
 
-    public DateTime? SearchDate { get; set; }
+    public int Id { get; set; }
 
     public virtual User User { get; set; } = null!;
 }

@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using BLL.BllModels;
 using BLL.IBll;
-using dal.models;
+
 using DAL;
+using DAL.IDal;
+using DAL.models;
+using System.Linq;
+
 
 using static BLL.Exeptions.BorrowRequestExeptions;
 
@@ -43,17 +47,17 @@ namespace BLL.BllService
                 int itemId = item.ItemId ?? 0;
                 var dalRequest = mapper.Map<BorrowRequest>(item);
 
-                //List<BorrowRequest> allBorrowRequests = await _dalManager.BorrowRequests.ReadAll();
+                List<BorrowRequest> allBorrowRequests = await _dalManager.BorrowRequests.ReadAll();
 
-                //List<BorrowRequest> itemBorrowRequests = allBorrowRequests.Where(br => br.ItemId == item.ItemId).ToList();
+                List<BorrowRequest> itemBorrowRequests = allBorrowRequests.Where(br => br.ItemId == item.ItemId).ToList();
 
-                //foreach (var existingRequest in itemBorrowRequests)
-                //{
-                //    if (item.FromDate < existingRequest.UntilDate && item.UntilDate > existingRequest.FromDate)
-                //    {
-                //        throw new ItemTakenException();
-                //    }
-                //}
+                foreach (var existingRequest in itemBorrowRequests)
+                {
+                    if (item.FromDate < existingRequest.UntilDate && item.UntilDate > existingRequest.FromDate)
+                    {
+                        throw new ItemTakenException();
+                    }
+                }
 
                 if (dalRequest != null)
                 {
@@ -117,7 +121,8 @@ namespace BLL.BllService
 
                 foreach (var borrowApprovalRequest in borrowApprovalRequests)
                 {
-                    itemIds.Add(borrowApprovalRequest.ItemId);
+                      itemIds.Add((int)borrowApprovalRequest.ItemId);
+                 
 
                 }
 
@@ -127,9 +132,6 @@ namespace BLL.BllService
 
                 }
 
-                // קריאת רשימת הפריטים לפי itemIds
-                /*                List<Item> items = await _dalManager.Items.Read(i => itemIds.Contains(i.Id));
-                */
                 List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllItem>>(items);
             }
@@ -226,6 +228,36 @@ namespace BLL.BllService
             throw new NotImplementedException();
         }
 
+        public async Task<dynamic> GetBorrowRequestsAndApprovalsByItemId(int itemId)
+        {
+            try
+            {
+                var borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.ItemId == itemId);
+                var borrowRequests = await _dalManager.BorrowRequests.Read(br => br.ItemId == itemId);
 
+                var mappedBorrowApprovalRequests = mapper.Map<List<BorrowApprovalRequest>, List<BllBorrowApprovalRequest>>(borrowApprovalRequests);
+                var mappedBorrowRequests = mapper.Map<List<BorrowRequest>, List<BllBorrowRequest>>(borrowRequests);
+
+                var result = new
+                {
+                    BorrowApprovalRequests = mappedBorrowApprovalRequests,
+                    BorrowRequests = mappedBorrowRequests
+                };
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            throw new NotImplementedException();
+        }
+
+        public async Task<BllItem> getItemById(int item)
+        {
+            Item items = await _dalManager.items.ReadbyId(item);
+            return mapper.Map<Item, BllItem>(items);
+        }
     }
 }

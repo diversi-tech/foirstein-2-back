@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 namespace DAL.models;
 
-
-public partial class ItemTag
+public partial class PhysicalItemTag
 {
     public int Id { get; set; }
 
-    public int ItemId { get; set; }
+    public int PhysicalItemId { get; set; }
 
     public int TagId { get; set; }
 
-    public virtual Item Item { get; set; } = null!;
+    public virtual PhysicalItem PhysicalItem { get; set; } = null!;
 
     public virtual Tag Tag { get; set; } = null!;
 }

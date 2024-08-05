@@ -1,7 +1,13 @@
 ﻿
 using AutoMapper;
 using BLL.BllModels;
-using dal.models;
+using BLL.IBll;
+using DAL.models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 
 namespace BLL

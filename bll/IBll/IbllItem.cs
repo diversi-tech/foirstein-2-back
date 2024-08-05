@@ -1,5 +1,11 @@
 ﻿using BL.BLApi;
 using BLL.BllModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace BLL.IBll
 {
@@ -11,7 +17,7 @@ namespace BLL.IBll
         Task<IEnumerable<BllItem>> ReadTheRecommended();
         Task<IEnumerable<BllItem>> ReadByTag(int tagId);
         Task<IEnumerable<BllItem>> ReadMostRequested();
-
+        Task<IEnumerable<BllItem>> ReadSavedItems(int userId);
 
 
     }

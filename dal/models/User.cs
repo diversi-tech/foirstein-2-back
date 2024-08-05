@@ -1,4 +1,8 @@
-﻿namespace dal.models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace DAL.models;
+
 
 public partial class User
 {
@@ -6,7 +10,9 @@ public partial class User
 
     public string Tz { get; set; } = null!;
 
-    public string UserName { get; set; } = null!;
+    public string Sname { get; set; } = null!;
+
+    public string Fname { get; set; } = null!;
 
     public string PasswordHash { get; set; } = null!;
 
@@ -16,7 +22,7 @@ public partial class User
 
     public string? ProfilePicture { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 
@@ -24,11 +30,25 @@ public partial class User
 
     public string PhoneNumber { get; set; } = null!;
 
+    public string Megama { get; set; } = null!;
+
+    public bool? Activity { get; set; }
+
     public virtual ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>();
 
     public virtual ICollection<BorrowApprovalRequest> BorrowApprovalRequests { get; set; } = new List<BorrowApprovalRequest>();
 
     public virtual ICollection<BorrowRequest> BorrowRequests { get; set; } = new List<BorrowRequest>();
+
+    public virtual ICollection<Borrowing> BorrowingLibrarians { get; set; } = new List<Borrowing>();
+
+    public virtual ICollection<Borrowing> BorrowingStudents { get; set; } = new List<Borrowing>();
+
+    public virtual ICollection<Conversation> ConversationUserId1Navigations { get; set; } = new List<Conversation>();
+
+    public virtual ICollection<Conversation> ConversationUserId2Navigations { get; set; } = new List<Conversation>();
+
+    public virtual ICollection<LibrarianPermission> LibrarianPermissions { get; set; } = new List<LibrarianPermission>();
 
     public virtual ICollection<RatingNote> RatingNotes { get; set; } = new List<RatingNote>();
 

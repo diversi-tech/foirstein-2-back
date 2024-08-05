@@ -98,7 +98,19 @@ namespace WEBAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
             }
         }
-
+        [HttpGet("GetBorrowRequestsAndApprovalsByItemId/{Id}")]
+        public async Task<IActionResult> GetBorrowRequestsAndApprovalsByItemId(int Id)
+        {
+            try
+            {
+                var result = await _blManager.BorrowRequests.GetBorrowRequestsAndApprovalsByItemId(Id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
+            }
+        }
         [HttpPost]
         [Route("AddBorrowRequest")]
         public async Task<ActionResult<bool>> AddBorrowRequest(BllBorrowRequest borrowRequest)
@@ -133,6 +145,20 @@ namespace WEBAPI.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred"); // HTTP 500 Internal Server Error for other exceptions
+            }
+        }
+
+        [HttpGet("getItemById/{Id}")]
+        public async Task<IActionResult> getItemById(int Id)
+        {
+            try
+            {
+                var result = await _blManager.BorrowRequests.getItemById(Id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error occurred: {ex.Message}");
             }
         }
 
