@@ -125,5 +125,33 @@ namespace DAL.DalService
 
             return items;
         }
+
+        public async Task<Item> ReadbyIdIncloud(int idItem)
+        {
+            return await _context.Items.Include(x => x.ItemTags).FirstOrDefaultAsync(t => t.Id == idItem);
+        }
+
+        public async Task<List<Item>> ReadAllIncloud(Item item)
+        {
+            Item? itemWithTags = await ReadbyIdIncloud(item.Id);
+            if (itemWithTags == null)
+            {
+                return new List<Item>();
+            }
+            var tagIds = itemWithTags.ItemTags.Select(tag => tag.Id).ToList();
+            return await _context.Items
+                .Include(x => x.ItemTags)
+                .Where(i => i.ItemTags.Any(tag => tagIds.Contains(tag.Id)))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Item>> ItemSuggestions(Item selectedItem)
+        {
+            return _context.Items.Where(item =>
+                ((item.Author == selectedItem.Author) ||
+                (item.Category == selectedItem.Category) ||
+                (item.Series == selectedItem.Series)) &&
+                item.Id != selectedItem.Id);
+        }
     }
 }
