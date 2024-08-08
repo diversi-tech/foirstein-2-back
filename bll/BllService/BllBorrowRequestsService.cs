@@ -122,7 +122,7 @@ namespace BLL.BllService
                      itemIds.Add(borrowRequest.ItemId.Value);
                
                 }
-              itemIds = itemIds.Distinct().ToList();
+              // itemIds = itemIds.Distinct().ToList();
               
               List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllItem>>(items);
