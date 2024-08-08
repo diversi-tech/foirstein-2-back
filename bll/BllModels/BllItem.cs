@@ -6,13 +6,13 @@
 
         public string Title { get; set; } = null!;
 
-        public string Author { get; set; } = null!;
+        public string? Author { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
         public string? Category { get; set; }
 
-        public string FilePath { get; set; } = null!;
+        public string? FilePath { get; set; } = null!;
 
         public bool IsApproved { get; set; }
 
