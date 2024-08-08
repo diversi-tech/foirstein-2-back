@@ -1,11 +1,4 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
 ﻿namespace BLL.BllModels
 {
 
@@ -23,14 +16,14 @@ using System.Threading.Tasks;
 
         public bool? SavedItem { get; set; }
 
-        public BllRatingNote(int RatingNoteId, int UserId, int? ItemId, string? Note, int? Rating)
+        public BllRatingNote(int RatingNoteId, int UserId, int? ItemId, string? Note, int? Rating,bool? SavedItem)
         {
             this.RatingNoteId = RatingNoteId;
             this.UserId = UserId;
             this.ItemId = ItemId;
             this.Note = Note;
             this.Rating = Rating;
-
+            this.SavedItem = SavedItem;
         }
     }
 }
