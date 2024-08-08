@@ -102,35 +102,29 @@ namespace BLL.BllService
                 throw ex;
             }
         }
-
-        public async Task<List<BllItem>> getAllItemToUser(int userId)
+ public async Task<List<BllItem>> getAllItemToUser(int userId)
         {
             try
             {
                 List<BorrowApprovalRequest> borrowApprovalRequests = await _dalManager.BorrowApprovalRequests.Read(br => br.UserId == userId);
                 List<BorrowRequest> borrowRequests = await _dalManager.BorrowRequests.Read(br => br.UserId == userId);
 
+                List<int> itemIds = new List<int>();
 
-                 List<int> itemIds = new List<int>();
-
-                 foreach (var borrowApprovalRequest in borrowApprovalRequests)
-                 {
-                       itemIds.Add((int)borrowApprovalRequest.ItemId);
+                foreach (var borrowApprovalRequest in borrowApprovalRequests)
+                {
+                      itemIds.Add(borrowApprovalRequest.ItemId);
                  
+                }
 
-                 }
-
-                 foreach (var borrowRequest in borrowRequests)
-                 {
+                foreach (var borrowRequest in borrowRequests)
+                {
                      itemIds.Add(borrowRequest.ItemId.Value);
-
-                 }
-                 // var itemIds = borrowRequests.Select(br => br.ItemId)
-                 //                               .Concat(borrowApprovalRequests.Select(br => br.ItemId))
-                 //                               .Distinct() .ToList();
-                itemIds = itemIds.Distinct().ToList();
-
-                List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
+               
+                }
+              itemIds = itemIds.Distinct().ToList();
+              
+              List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllItem>>(items);
             }
             catch (Exception ex)
@@ -138,6 +132,7 @@ namespace BLL.BllService
                 throw ex;
             }
         }
+
 
         public async Task<List<BllBorrowRequest>> Read(Func<BllBorrowRequest, bool> filter)
         {
