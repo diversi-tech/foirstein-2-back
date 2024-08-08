@@ -113,7 +113,7 @@ namespace BLL.BllService
 
                 foreach (var borrowApprovalRequest in borrowApprovalRequests)
                 {
-                      itemIds.Add(borrowApprovalRequest.ItemId);
+                      itemIds.Add(borrowApprovalRequest.ItemId.Value);
                  
                 }
 
