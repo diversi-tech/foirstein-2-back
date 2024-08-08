@@ -147,7 +147,7 @@ namespace BLL.BllService
             }
         }
 
-        public async Task<dynamic> GetBorrowRequestsAndApprovals(int userId)
+       public async Task<dynamic> GetBorrowRequestsAndApprovals(int userId)
         {
             try
             {
@@ -171,7 +171,7 @@ namespace BLL.BllService
                 throw ex;
             }
         }
-
+        
         public async Task<List<BllBorrowRequest>> Read(int userId)
         {
             try
