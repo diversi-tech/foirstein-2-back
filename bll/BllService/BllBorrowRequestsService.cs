@@ -251,7 +251,9 @@ namespace BLL.BllService
         {
         try{
             Item items = await _dalManager.items.ReadbyId(item);
-            return mapper.Map<Item, BllItem>(items);
+            if(items.Author == null)
+            items.Author= "זה יכל היות שגיאה ";
+            return mapper.Map<Item, BllItem>(items);            
             }
    catch (Exception ex)
    {
