@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using DAL.IDal;
 using DAL.models;
-
-using DAL.IDal;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.DalService
 {

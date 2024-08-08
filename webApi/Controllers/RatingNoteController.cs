@@ -31,8 +31,8 @@ namespace webApi.Controllers
         }
 
 
-        [HttpPut("PutRatingNote/{ratingNoteId}")]
-        public async Task<ActionResult<bool>> UpdateRatingNote(int ratingNoteId, [FromBody] BllRatingNote rating)
+        [HttpPut("PutRatingNote")]
+        public async Task<ActionResult<bool>> UpdateRatingNote([FromBody] BllRatingNote rating)
         {
             try
             {
