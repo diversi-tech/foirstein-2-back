@@ -21,11 +21,11 @@ public class BllBorrowApprovalRequest
 
     public int LibrariansId { get; set; }
 
-    public bool? IsReturned { get; set; }
+    //public bool? IsReturned { get; set; }
 
-    public DateTime? FromDate { get; set; }
+    //public DateTime? FromDate { get; set; }
 
-    public DateTime? UntilDate { get; set; }
+    //public DateTime? UntilDate { get; set; }
 
 
 

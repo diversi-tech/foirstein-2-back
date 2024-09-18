@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 
 namespace DAL.models;
 
@@ -47,7 +48,7 @@ public partial class LiberiansDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=dpg-"Host=dpg-cqr3eqbv2p9s73bdjt6g-a.oregon-postgres.render.com;Database=foyershteindb;Username=foyershtein;Password=WRfkTuKOhYDDJHXy1kwvPHa4fBdrrn4O;");
+        => optionsBuilder.UseNpgsql("Host=dpg-cqr3eqbv2p9s73bdjt6g-a.oregon-postgres.render.com;Database=foyershteindb;Username=foyershtein;Password=WRfkTuKOhYDDJHXy1kwvPHa4fBdrrn4O;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,8 +78,8 @@ public partial class LiberiansDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "IX_Borrow_Approval_Requests_UserId");
 
-            entity.Property(e => e.FromDate).HasColumnType("timestamp without time zone");
-            entity.Property(e => e.UntilDate).HasColumnType("timestamp without time zone");
+            //entity.Property(e => e.FromDate).HasColumnType("timestamp without time zone");
+            //entity.Property(e => e.UntilDate).HasColumnType("timestamp without time zone");
 
             entity.HasOne(d => d.User).WithMany(p => p.BorrowApprovalRequests).HasForeignKey(d => d.UserId);
         });
