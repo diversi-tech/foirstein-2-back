@@ -27,7 +27,7 @@ namespace BLL.BllService
         }
         public BllBorrowRequestsService(IMapper mapper, DalManager dalManager)
         {
-            mapper = mapper;
+            this.mapper = mapper;
             _dalManager = dalManager;
         }
         public void MapBorrowRequest()
@@ -102,7 +102,7 @@ namespace BLL.BllService
                 throw ex;
             }
         }
- public async Task<List<BllItem>> getAllItemToUser(int userId)
+        public async Task<List<BllItem>> getAllItemToUser(int userId)
         {
             try
             {
@@ -113,18 +113,18 @@ namespace BLL.BllService
 
                 foreach (var borrowApprovalRequest in borrowApprovalRequests)
                 {
-                      itemIds.Add(borrowApprovalRequest.ItemId.Value);
-                 
+                    itemIds.Add(borrowApprovalRequest.ItemId.Value);
+
                 }
 
                 foreach (var borrowRequest in borrowRequests)
                 {
-                     itemIds.Add(borrowRequest.ItemId.Value);
-               
+                    itemIds.Add(borrowRequest.ItemId.Value);
+
                 }
-              // itemIds = itemIds.Distinct().ToList();
-              
-              List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
+                // itemIds = itemIds.Distinct().ToList();
+
+                List<Item> items = await _dalManager.items.Read(i => itemIds.Contains(i.Id));
                 return mapper.Map<List<Item>, List<BllItem>>(items);
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace BLL.BllService
             }
         }
 
-       public async Task<dynamic> GetBorrowRequestsAndApprovals(int userId)
+        public async Task<dynamic> GetBorrowRequestsAndApprovals(int userId)
         {
             try
             {
@@ -171,7 +171,7 @@ namespace BLL.BllService
                 throw ex;
             }
         }
-        
+
         public async Task<List<BllBorrowRequest>> Read(int userId)
         {
             try
@@ -249,16 +249,17 @@ namespace BLL.BllService
 
         public async Task<BllItem> getItemById(int item)
         {
-        try{
-            Item items = await _dalManager.items.ReadbyId(item);
-            if(items.Author == null)
-            items.Author= "זה יכל היות שגיאה ";
-            return mapper.Map<Item, BllItem>(items);            
+            try
+            {
+                Item items = await _dalManager.items.ReadbyId(item);
+                if (items.Author == null)
+                    items.Author = "זה יכל היות שגיאה ";
+                return mapper.Map<Item, BllItem>(items);
             }
-   catch (Exception ex)
-   {
-       throw ex;
-   }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

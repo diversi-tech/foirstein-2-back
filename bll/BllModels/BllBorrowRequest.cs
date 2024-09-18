@@ -26,7 +26,7 @@ namespace BLL.BllModels
 
         public decimal? TotalPrice { get; set; }
 
-        public bool? IsWaiting { get; set; }
+       // public bool? IsWaiting { get; set; }
 
 
 
